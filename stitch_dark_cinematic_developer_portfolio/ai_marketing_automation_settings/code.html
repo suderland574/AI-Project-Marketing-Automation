@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings | Aetheris AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#305ea3",
+                        "on-primary-container": "#0a4488",
+                        "primary-fixed-dim": "#aac7ff",
+                        "outline-variant": "#434751",
+                        "primary-container": "#8ab4ff",
+                        "secondary-fixed-dim": "#4ddcc6",
+                        "surface": "#111318",
+                        "surface-container-lowest": "#0c0e13",
+                        "tertiary-fixed": "#ffdea2",
+                        "on-surface": "#e2e2e8",
+                        "on-primary": "#002f65",
+                        "tertiary-container": "#deac3e",
+                        "tertiary": "#fcc757",
+                        "secondary-fixed": "#6ef9e2",
+                        "on-secondary": "#003730",
+                        "surface-bright": "#37393e",
+                        "secondary": "#4ddcc6",
+                        "inverse-on-surface": "#2f3035",
+                        "on-background": "#e2e2e8",
+                        "surface-container": "#1e2024",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#f3bf4f",
+                        "inverse-surface": "#e2e2e8",
+                        "on-tertiary-container": "#5b4100",
+                        "outline": "#8d909c",
+                        "surface-tint": "#aac7ff",
+                        "on-secondary-fixed-variant": "#005047",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-high": "#282a2f",
+                        "on-secondary-fixed": "#00201b",
+                        "on-tertiary-fixed-variant": "#5c4200",
+                        "surface-container-low": "#1a1c20",
+                        "on-primary-fixed": "#001b3e",
+                        "surface-container-highest": "#33353a",
+                        "primary-fixed": "#d7e3ff",
+                        "primary": "#b8d0ff",
+                        "error-container": "#93000a",
+                        "surface-dim": "#111318",
+                        "secondary-container": "#00b4a0",
+                        "on-surface-variant": "#c3c6d2",
+                        "on-primary-fixed-variant": "#0d4689",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#003f37",
+                        "on-tertiary": "#402d00",
+                        "background": "#111318",
+                        "surface-variant": "#33353a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px",
+                        "section-gap": "80px",
+                        "stack-sm": "8px",
+                        "margin-x": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Instrument Serif"],
+                        "display-lg-mobile": ["Instrument Serif"],
+                        "display-lg": ["Instrument Serif"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Instrument Serif"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #111318;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(19, 26, 34, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(67, 71, 81, 0.3);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .custom-cursor {
+            pointer-events: none;
+            position: fixed;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #aac7ff;
+            border-radius: 50%;
+        }
+
+        .cursor-ring {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #4ddcc6;
+            border-radius: 50%;
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            transition: all 0.3s ease-out;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 4px;
+            background: rgba(67, 71, 81, 0.5);
+            border-radius: 2px;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #4ddcc6;
+            margin-top: -6px;
+            box-shadow: 0 0 10px rgba(77, 220, 198, 0.4);
+        }
+
+        .tilt-card {
+            transition: transform 0.2s ease-out, border-color 0.2s ease-out;
+        }
+
+        .tilt-card:hover {
+            border-color: rgba(77, 220, 198, 0.5);
+        }
+
+        @keyframes ping-glow {
+            0% { box-shadow: 0 0 0 0 rgba(77, 220, 198, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(77, 220, 198, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(77, 220, 198, 0); }
+        }
+
+        .status-dot-active {
+            animation: ping-glow 2s infinite;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Background Decoration -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+
+<div class="absolute -top-1/4 -right-1/4 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="absolute -bottom-1/4 -left-1/4 w-[800px] h-[800px] bg-secondary/5 blur-[120px] rounded-full"></div>
+</div>
+<!-- Custom Cursor -->
+<div class="custom-cursor" id="cursor">
+<div class="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+</div>
+<!-- SideNavBar Anchor -->
+<nav class="fixed left-0 top-0 h-full w-64 flex flex-col z-40 bg-surface-container-lowest border-r border-outline-variant/20">
+<div class="p-stack-lg">
+<div class="flex items-center gap-stack-sm mb-stack-lg">
+<span class="material-symbols-outlined text-primary font-headline-sm text-headline-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tighter leading-none">Aetheris Core</span>
+<div class="flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-secondary status-dot-active"></div>
+<span class="text-[10px] text-on-surface-variant font-label-caps tracking-widest">AI ACTIVE</span>
+</div>
+</div>
+</div>
+<div class="space-y-1">
+<!-- Navigation Items -->
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-all group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-all group" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-caps text-label-caps">Calendar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-all group" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-caps text-label-caps">Agents</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-all group" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-caps text-label-caps">Content</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-all group" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/10 transition-all group" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-label-caps text-label-caps">Integrations</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-secondary border-l-2 border-secondary bg-secondary/5 shadow-[inset_10px_0_15px_-10px_rgba(77,220,198,0.2)] translate-x-1 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</div>
+</div>
+<div class="mt-auto p-stack-lg space-y-1">
+<button class="w-full py-3 mb-stack-md bg-secondary text-on-secondary font-button text-button rounded-xl hover:scale-105 transition-all">
+                New Campaign
+            </button>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-secondary transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Help</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-secondary transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 relative z-10 min-h-screen p-stack-lg md:p-section-gap">
+<header class="mb-stack-lg max-w-container-max mx-auto">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">System Settings</h1>
+<p class="text-on-surface-variant font-body-md">Configure your brand identity, AI agent behavior, and team collaboration protocols.</p>
+</header>
+<div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Brand & Agents -->
+<div class="lg:col-span-7 space-y-gutter">
+<!-- Brand Voice Card -->
+<section class="glass-panel rounded-xl p-stack-lg tilt-card">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-secondary">record_voice_over</span>
+<h2 class="font-headline-sm text-headline-sm">Brand Voice Architecture</h2>
+</div>
+<div class="space-y-stack-md">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">TONE OF VOICE</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-xl px-4 py-3 text-on-surface focus:border-secondary outline-none transition-all" placeholder="E.g., Professional yet witty, expert-level technical knowledge..." type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-[10px] text-on-surface-variant">LITERAL</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">METAPHORICAL</span>
+</div>
+<input class="w-full" type="range"/>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-[10px] text-on-surface-variant">FORMAL</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">CONVERSATIONAL</span>
+</div>
+<input class="w-full" type="range"/>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-2">FORBIDDEN TERMS</label>
+<div class="flex flex-wrap gap-2 p-3 bg-surface-container-lowest border border-outline-variant/30 rounded-xl min-h-[80px]">
+<span class="bg-surface-variant/30 border border-outline-variant/50 text-[11px] px-2 py-1 rounded-lg flex items-center gap-1">
+                                    synergy <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</span>
+<span class="bg-surface-variant/30 border border-outline-variant/50 text-[11px] px-2 py-1 rounded-lg flex items-center gap-1">
+                                    paradigm shift <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</span>
+<input class="bg-transparent border-none outline-none text-on-surface text-sm flex-grow min-w-[100px]" placeholder="Add term..." type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Agent Behavior Card -->
+<section class="glass-panel rounded-xl p-stack-lg tilt-card">
+<div class="flex items-center gap-stack-sm mb-stack-md">
+<span class="material-symbols-outlined text-secondary">memory</span>
+<h2 class="font-headline-sm text-headline-sm">Agent Cognitive Tuning</h2>
+</div>
+<div class="space-y-stack-md divide-y divide-outline-variant/10">
+<!-- Agent 1 -->
+<div class="pt-2 space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+</div>
+<div>
+<div class="text-on-surface font-semibold">Copywriter Prime</div>
+<div class="text-[10px] text-on-surface-variant font-label-caps">CONTENT GENERATION</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div>
+<label class="block text-[10px] text-on-surface-variant font-label-caps mb-1">CREATIVITY ENTROPY</label>
+<input class="w-full" type="range"/>
+</div>
+<div>
+<label class="block text-[10px] text-on-surface-variant font-label-caps mb-1">POSTING VELOCITY</label>
+<input class="w-full" type="range"/>
+</div>
+</div>
+</div>
+<!-- Agent 2 -->
+<div class="pt-4 space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+</div>
+<div>
+<div class="text-on-surface font-semibold">Trend Analyst</div>
+<div class="text-[10px] text-on-surface-variant font-label-caps">MARKET RESEARCH</div>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Team & Notifications -->
+<div class="lg:col-span-5 space-y-gutter">
+<!-- Team Management -->
+<section class="glass-panel rounded-xl p-stack-lg tilt-card h-full">
+<div class="flex justify-between items-center mb-stack-md">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-secondary">group</span>
+<h2 class="font-headline-sm text-headline-sm">Collaboration Hub</h2>
+</div>
+<button class="text-[10px] font-label-caps text-secondary border border-secondary/30 px-3 py-1 rounded-lg hover:bg-secondary/10 transition-colors">INVITE</button>
+</div>
+<div class="overflow-hidden border border-outline-variant/20 rounded-xl">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant/20">
+<tr>
+<th class="px-4 py-3 font-label-caps text-[10px] text-on-surface-variant">MEMBER</th>
+<th class="px-4 py-3 font-label-caps text-[10px] text-on-surface-variant">ROLE</th>
+<th class="px-4 py-3 font-label-caps text-[10px] text-on-surface-variant"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-variant/5 transition-colors">
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a modern tech executive with a friendly expression, wearing a charcoal grey sweater, set against a dark architectural background with soft blue lighting accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfzFF5tuPznldLUiiuNB5vb0asnSVylIlbXjl9MvB47vqNfIcnUJAgdPkS69QGZgv6jBUELBKLkfPA6ECIMhaROpakjkq472aGJYaFhK3VEREbRvNpko2WttrtyzlgExOgbrnfIptwJbMuzFyb-w_hBAqSsMEDq9alXBVAAuyz8XbU5jtMdRq2n9bjx9csckuHWfJ8VOB5j8EXHxXvy7vrGlufRUridUNQ4epXoIDJ25iE9PPODpy0sWXlMuFLs-igkENI63-_Pg4Z"/>
+</div>
+<div>
+<div class="text-sm font-medium">Alex Rivera</div>
+<div class="text-[10px] text-on-surface-variant">alex@aetheris.ai</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="text-[10px] font-label-caps bg-primary-container/20 text-on-primary-container px-2 py-0.5 rounded-full border border-primary-container/30">ADMIN</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors">delete</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/5 transition-colors">
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-secondary/20">
+<img class="w-full h-full object-cover" data-alt="A portrait of a creative professional woman with a stylish, modern look, wearing large glasses and a black turtleneck, in a high-end minimalist office space with cinematic blue and teal ambient lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv42nxrjGg46QO9qwSOqQK8WijvYDLypZ-L6DbKX6z9y5kslzHYLgTaaJ0ue4tviQNc1ZsztPMK8AtX92UWEuOXOwZRkU2BZt0Re6_6jwG8-BYW98ppAWePh0NfiYCtCJkuWf7afNQLPmzhnGdPgeRO4X4oprCEwOEbChWohfXa7pJuaH9RdWepD6MigHEfTNEmCl-s0Qx69yvPwmSXGM1oCL2Z9vi3Jlpsptx4l6OflJX1D6qlBA94b_qoNmBGVmbbZdiJDt-WJOP"/>
+</div>
+<div>
+<div class="text-sm font-medium">Sarah Chen</div>
+<div class="text-[10px] text-on-surface-variant">sarah@aetheris.ai</div>
+</div>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="text-[10px] font-label-caps bg-outline-variant/20 text-on-surface-variant px-2 py-0.5 rounded-full border border-outline-variant/30">EDITOR</span>
+</td>
+<td class="px-4 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-error transition-colors">delete</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-stack-lg space-y-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">NOTIFICATION PROTOCOLS</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-sm">Agent Milestone Alerts</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm">Critical Integration Errors</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm">Weekly Intelligence Report</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Footer Anchor -->
+<footer class="mt-section-gap w-full py-12 border-t border-outline-variant/20 max-w-container-max mx-auto flex flex-col items-center gap-stack-lg">
+<div class="font-display-lg text-display-lg opacity-10 uppercase tracking-[1em] select-none">AETHERIS</div>
+<div class="flex gap-stack-lg">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors flex items-center gap-2" href="#">
+<div class="w-1.5 h-1.5 bg-secondary rounded-full"></div>
+                    API Status
+                </a>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">2024 Aetheris AI. Never Miss A Posting Time.</p>
+</footer>
+</main>
+<!-- Interactive Layer -->
+<script>
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursor-ring');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
+
+        document.addEventListener('mousedown', () => {
+            ring.style.transform = 'scale(0.8)';
+            ring.style.borderColor = '#aac7ff';
+        });
+
+        document.addEventListener('mouseup', () => {
+            ring.style.transform = 'scale(1)';
+            ring.style.borderColor = '#4ddcc6';
+        });
+
+        // Hover effect for interactive elements
+        const targets = document.querySelectorAll('button, a, input, [role="button"]');
+        targets.forEach(t => {
+            t.addEventListener('mouseenter', () => {
+                ring.style.transform = 'scale(1.5)';
+                ring.style.borderWidth = '2px';
+                ring.style.backgroundColor = 'rgba(77, 220, 198, 0.1)';
+            });
+            t.addEventListener('mouseleave', () => {
+                ring.style.transform = 'scale(1)';
+                ring.style.borderWidth = '1px';
+                ring.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // Simple tilt logic for cards
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 25;
+                const rotateY = (centerX - x) / 25;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            });
+        });
+    </script>
+</body></html>

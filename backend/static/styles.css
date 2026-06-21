@@ -1,0 +1,209 @@
+:root {
+  color-scheme: dark;
+  --surface: #111318;
+  --surface-container: #1e2024;
+  --surface-container-low: #1a1c20;
+  --surface-container-high: #282a2f;
+  --surface-container-highest: #33353a;
+  --on-surface: #e2e2e8;
+  --on-surface-variant: #c3c6d2;
+  --outline: #8d909c;
+  --outline-variant: #434751;
+  --primary: #b8d0ff;
+  --secondary: #4ddcc6;
+  --tertiary: #fcc757;
+  --background: #111318;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--on-surface);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.08s ease;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--secondary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.mesh-blob {
+  filter: blur(80px);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.glass,
+.glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(19, 26, 34, 0.8);
+  border: 1px solid rgba(67, 71, 81, 0.3);
+}
+
+.glass-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(77, 220, 198, 0.5);
+  box-shadow: 0 0 20px rgba(77, 220, 198, 0.1);
+  transform: translateY(-2px);
+}
+
+.tilt-card {
+  transition: transform 0.4s ease, border-color 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.tilt-card:hover {
+  border-color: rgba(77, 220, 198, 0.5);
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+}
+
+.ping-dot {
+  animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #aac7ff 0%, #4ddcc6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.animate-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll 30s linear infinite;
+}
+
+.marquee-container {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.pipeline-item.active {
+  border-color: #4ddcc6;
+  box-shadow: inset 0 0 15px rgba(77, 220, 198, 0.1);
+}
+
+.pipeline-connector {
+  background: linear-gradient(90deg, #4ddcc6, #305ea3);
+  filter: blur(1px);
+}
+
+.pulsing-agent {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(170, 199, 255, 0.2); transform: scale(1); }
+  50% { box-shadow: 0 0 20px rgba(170, 199, 255, 0.6); transform: scale(1.05); }
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.loading-panel {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 24px;
+}
+
+.loading-kicker,
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  color: var(--on-surface-variant);
+}
+
+.loading-title,
+.hero-title,
+.section-title,
+.brand-name {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.loading-title {
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  color: var(--on-surface);
+}
+
+.loading-bar {
+  width: min(320px, 80vw);
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  border: 1px solid rgba(67, 71, 81, 0.3);
+}
+
+.loading-bar span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  animation: load-sweep 1.3s ease-in-out infinite alternate;
+}
+
+@keyframes load-sweep {
+  from { transform: translateX(-20%); }
+  to { transform: translateX(145%); }
+}
+
+/* The rest of the page is styled directly with Tailwind utility classes. */

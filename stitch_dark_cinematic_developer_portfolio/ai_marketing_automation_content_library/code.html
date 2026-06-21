@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aetheris AI | Marketing Content Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#305ea3",
+                        "on-primary-container": "#0a4488",
+                        "primary-fixed-dim": "#aac7ff",
+                        "outline-variant": "#434751",
+                        "primary-container": "#8ab4ff",
+                        "secondary-fixed-dim": "#4ddcc6",
+                        "surface": "#111318",
+                        "surface-container-lowest": "#0c0e13",
+                        "tertiary-fixed": "#ffdea2",
+                        "on-surface": "#e2e2e8",
+                        "on-primary": "#002f65",
+                        "tertiary-container": "#deac3e",
+                        "tertiary": "#fcc757",
+                        "secondary-fixed": "#6ef9e2",
+                        "on-secondary": "#003730",
+                        "surface-bright": "#37393e",
+                        "secondary": "#4ddcc6",
+                        "inverse-on-surface": "#2f3035",
+                        "on-background": "#e2e2e8",
+                        "surface-container": "#1e2024",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#f3bf4f",
+                        "inverse-surface": "#e2e2e8",
+                        "on-tertiary-container": "#5b4100",
+                        "outline": "#8d909c",
+                        "surface-tint": "#aac7ff",
+                        "on-secondary-fixed-variant": "#005047",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-high": "#282a2f",
+                        "on-secondary-fixed": "#00201b",
+                        "on-tertiary-fixed-variant": "#5c4200",
+                        "surface-container-low": "#1a1c20",
+                        "on-primary-fixed": "#001b3e",
+                        "surface-container-highest": "#33353a",
+                        "primary-fixed": "#d7e3ff",
+                        "primary": "#b8d0ff",
+                        "error-container": "#93000a",
+                        "surface-dim": "#111318",
+                        "secondary-container": "#00b4a0",
+                        "on-surface-variant": "#c3c6d2",
+                        "on-primary-fixed-variant": "#0d4689",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#003f37",
+                        "on-tertiary": "#402d00",
+                        "background": "#111318",
+                        "surface-variant": "#33353a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px",
+                        "section-gap": "80px",
+                        "stack-sm": "8px",
+                        "margin-x": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Instrument Serif"],
+                        "display-lg": ["Instrument Serif"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Instrument Serif"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "button": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(19, 26, 34, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(67, 71, 81, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px) rotateX(2deg);
+            border-color: rgba(170, 199, 255, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(170, 199, 255, 0.15);
+        }
+        .neon-border {
+            position: relative;
+        }
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(45deg, transparent, #b8d0ff, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.3;
+        }
+        .neon-border-active::after {
+            background: linear-gradient(45deg, #b8d0ff, #4ddcc6);
+            opacity: 0.8;
+        }
+        .custom-cursor {
+            width: 8px;
+            height: 8px;
+            background: #b8d0ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .cursor-ring {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #4ddcc6;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transition: transform 0.1s ease-out;
+            z-index: 9998;
+        }
+        .markdown-content h1 { font-family: 'Instrument Serif'; font-size: 24px; margin-bottom: 1rem; color: #b8d0ff; }
+        .markdown-content p { margin-bottom: 0.75rem; color: #c3c6d2; }
+        .markdown-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; color: #c3c6d2; }
+        
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #4ddcc6;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(77, 220, 198, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(77, 220, 198, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(77, 220, 198, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary/30 font-body-md overflow-hidden">
+<div class="custom-cursor hidden md:block" id="cursor"></div>
+<div class="cursor-ring hidden md:block" id="cursor-ring"></div>
+<!-- Background Mesh Glows -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px]"></div>
+<div class="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] rounded-full bg-secondary/10 blur-[120px]"></div>
+</div>
+<div class="flex h-screen w-full relative z-10">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-surface-container-lowest border-r border-outline-variant/20 w-64">
+<div class="p-6 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[20px]">auto_awesome</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary leading-none">Aetheris Core</h2>
+<div class="flex items-center gap-2 mt-1">
+<div class="pulse-dot"></div>
+<span class="font-label-caps text-[10px] text-secondary">AI ACTIVE</span>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">calendar_month</span>
+<span class="font-label-caps text-label-caps">Calendar</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">smart_toy</span>
+<span class="font-label-caps text-label-caps">Agents</span>
+</a>
+<!-- Active State: Content -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-secondary border-l-2 border-secondary bg-secondary/5 shadow-[inset_10px_0_15px_-10px_rgba(77,220,198,0.2)] translate-x-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-caps text-label-caps">Content</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">hub</span>
+<span class="font-label-caps text-label-caps">Integrations</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/20 space-y-2">
+<button class="w-full py-3 px-4 bg-primary text-on-primary rounded-xl font-button text-button hover:brightness-110 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        New Campaign
+                    </button>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-secondary transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Help</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant hover:text-error transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 ml-64 p-gutter overflow-y-auto h-screen relative">
+<header class="flex items-center justify-between mb-stack-lg">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Marketing Content Library</h1>
+<p class="text-on-surface-variant font-body-md">Manage and deploy your AI-generated marketing assets.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-low border border-outline-variant/30 rounded-full px-4 py-2 w-80">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface w-full placeholder:text-outline" placeholder="Search content, campaigns, AI prompts..." type="text"/>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] ml-2 cursor-pointer hover:text-primary">tune</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Profile avatar of a marketing executive, professional and minimalist." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6HGaFwroj3w6nEfI_UG1ClaFK-xeazX24mMa13Atl1u6f-slbeXEMH4Yr7QwVBw7j2ze7UJjSBSosykC3suyFETIuJ338cdiV59p7fVPGwyZe6141L88_qo3zhS-9l-J0DtueDXXpztRLPhURqL5EIb9Y9zc3ITNyvkE664BxK2BhhZwuv1Y31prj81Az4ilr-as6-vRdTyvvUwgTScJJzHUsvl-E4RzAfowJql3pkLtFvL2X4RttNozh0U3gxvrzh-hVLmimiz9X"/>
+</div>
+</div>
+</header>
+<!-- Library View: Two-Column Bento Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Grid Area -->
+<div class="col-span-8 space-y-stack-md">
+<div class="flex items-center justify-between mb-4">
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-label-caps">ALL CONTENT</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/20 text-on-surface-variant text-[11px] font-label-caps hover:bg-surface-variant transition-colors cursor-pointer">BLOGS</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/20 text-on-surface-variant text-[11px] font-label-caps hover:bg-surface-variant transition-colors cursor-pointer">SOCIAL</span>
+<span class="px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/20 text-on-surface-variant text-[11px] font-label-caps hover:bg-surface-variant transition-colors cursor-pointer">VIDEO</span>
+</div>
+<div class="text-on-surface-variant text-[12px] font-label-caps">Sorted by: Recent</div>
+</div>
+<div class="grid grid-cols-2 gap-stack-md">
+<!-- Card 1 -->
+<div class="glass-card rounded-2xl p-4 cursor-pointer group" onclick="selectItem('blog-1')">
+<div class="relative rounded-xl overflow-hidden mb-4 border border-outline-variant/20">
+<img class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A futuristic 3D render of a friendly white robot assistant writing on a digital glowing holographic document. The aesthetic is clean, minimalist, and high-tech with soft neon blue backlighting and sharp reflections on the metal surfaces. It evokes a sense of collaborative human-AI creativity in a professional workspace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD90NQUUCYR3emFyR7lMYfY5Auj39S797U5u0uNNxuwNujYpdW53kVRoWxYSp10sQQ7gTtIxdG8FqKuO65HSQg2De_YSmxXgNpiWEMyNnnen4QsIvvo8lbJ2QxnqM9_aJghFkf9EG7giAYSEzXl4p7440tbjS0uEGszORlOfjnJZ8MlNFt7gwjauR6eCR1mhHDM6AH8wlnN9Y1XExE2IiJRQ4t51GvkF9sabC7gpBNTicokf_dFYetbKJ6xMMiY7FcnJCjxXwmP71DR"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-surface/80 backdrop-blur-md rounded-lg text-[10px] font-label-caps text-secondary border border-secondary/30">DRAFT</div>
+</div>
+<h3 class="text-on-surface font-headline-sm text-[18px] mb-2 leading-tight">AI Blog Draft: "Future of SEO"</h3>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-label-caps mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">article</span> BLOG POST</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 24, 2024</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-3 bg-on-surface-variant/10 hover:bg-secondary/20 hover:text-secondary border border-outline-variant/20 rounded-lg text-[12px] font-button transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">hub</span>
+                                    Publish to HubSpot
+                                </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-2xl p-4 cursor-pointer group border-secondary/40 shadow-[0_0_15px_rgba(77,220,198,0.05)]" onclick="selectItem('infographic-1')">
+<div class="relative rounded-xl overflow-hidden mb-4 border border-outline-variant/20">
+<img class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A complex and beautiful data visualization infographic showing Q3 marketing trends. High-end aesthetic with glowing neon bars, circular charts, and interconnected nodes. The color palette is dark navy background with electric cyan, magenta, and amber accents. The design is clean, professional, and visually engaging, representing deep data analysis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDF56dm_Bkt0U7FRX-omXJsfEPtXIuVvEAVCsmKxyMExTk1tX32p5-kWz8YdK4G8sPHotJlMaPNpJdKcyUYruPt3fp9v9fe8zwhgWF8qZZxFzgNIvqUarJGxFTw_YYbppBOai5cZgvisEMWtuBit9ueaLgWKEPkgG0LOz0NQ4XQo_QcmqxBstd4bwc0dPjeIcthP3sJn0Hd3j115t7ulQEgGZ8r_zS797QR72MgOgFRIOG5ZAXIP5-lUVit09RF7e2wM7EAXInfgX4"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-secondary/80 backdrop-blur-md rounded-lg text-[10px] font-label-caps text-on-secondary">READY</div>
+</div>
+<h3 class="text-on-surface font-headline-sm text-[18px] mb-2 leading-tight">Infographic: Q3 Trends</h3>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-label-caps mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">bar_chart</span> VISUAL</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 22, 2024</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-3 bg-secondary text-on-secondary rounded-lg text-[12px] font-button hover:brightness-110 transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">hub</span>
+                                    Publish to HubSpot
+                                </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-2xl p-4 cursor-pointer group" onclick="selectItem('video-1')">
+<div class="relative rounded-xl overflow-hidden mb-4 border border-outline-variant/20">
+<img class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stylized cinematic thumbnail for a video script titled Product Launch. It features a play icon in a glowing neon box against a soft bokeh background of a high-tech laboratory. The lighting is purple and blue with sharp highlights. Professional, cinematic aesthetic for a premium SaaS product launch teaser." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq9pnS5Bx0swD-0VCyd2izRTYBb9mnESFJa5PijIVchziePqFkvMwHLfV763qML3A0py3Ox8W-ggCmlvnrxuu-uDm2by6kdiQgSKi0q0NRx2YiWyuEAwMBLx8JMXtULT-iEw_3JC1gyEv3OSXQkcuJwV7q6LI_m93T_05UI9FcZEbgd3QM6IsBRhSD_fmWCkezQbmMkr1YahrqQfIkgCd-OKXeIC4FSi0bTsYfvhm3biEHl4623NHIHK7l9_CdewHsept34Hv5oJT2"/>
+<div class="absolute top-2 right-2 px-2 py-1 bg-surface/80 backdrop-blur-md rounded-lg text-[10px] font-label-caps text-tertiary border border-tertiary/30">REVIEW</div>
+</div>
+<h3 class="text-on-surface font-headline-sm text-[18px] mb-2 leading-tight">Video Script: Product Launch</h3>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-label-caps mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">movie</span> VIDEO</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 21, 2024</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-3 bg-on-surface-variant/10 hover:bg-primary/20 hover:text-primary border border-outline-variant/20 rounded-lg text-[12px] font-button transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                                    Schedule to Buffer
+                                </button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="glass-card rounded-2xl p-4 cursor-pointer group" onclick="selectItem('social-1')">
+<div class="relative rounded-xl overflow-hidden mb-4 border border-outline-variant/20 flex items-center justify-center bg-surface-container-high">
+<span class="material-symbols-outlined text-outline text-[48px] opacity-20">add_photo_alternate</span>
+<div class="absolute bottom-2 left-2 right-2 px-3 py-2 bg-surface/60 backdrop-blur-sm rounded-lg text-[10px] font-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] animate-spin">sync</span> AI GENERATING ASSETS...
+                                </div>
+</div>
+<h3 class="text-on-surface font-headline-sm text-[18px] mb-2 leading-tight">Social Post: Feature Update</h3>
+<div class="flex items-center justify-between text-[11px] text-on-surface-variant font-label-caps mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">chat</span> SOCIAL</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Oct 20, 2024</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 px-3 bg-on-surface-variant/5 text-outline-variant cursor-not-allowed border border-outline-variant/10 rounded-lg text-[12px] font-button flex items-center justify-center gap-1" disabled="">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                                    Processing
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Preview Panel -->
+<div class="col-span-4 h-[calc(100vh-140px)] flex flex-col">
+<div class="glass-card rounded-2xl h-full flex flex-col border border-primary/20 bg-primary/5" id="preview-container">
+<div class="p-6 border-b border-outline-variant/20 flex items-center justify-between">
+<h2 class="font-headline-sm text-[20px] text-primary">Content Preview</h2>
+<button class="p-2 hover:bg-surface-variant/20 rounded-lg text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 markdown-content" id="preview-content">
+<!-- Initial State -->
+<div class="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-50" id="preview-placeholder">
+<span class="material-symbols-outlined text-[64px]">visibility</span>
+<p class="font-label-caps">Select an item from the library<br/>to preview content</p>
+</div>
+<!-- Mock Markdown for 'blog-1' -->
+<div class="hidden" id="preview-blog-1">
+<h1>The Future of SEO: AI-First Optimization</h1>
+<p>In the rapidly evolving digital landscape, Search Engine Optimization (SEO) is undergoing a paradigm shift. With the integration of Large Language Models into search interfaces, the focus is moving from keyword stuffing to intent-based value creation.</p>
+<h3>Key Strategic Shifts:</h3>
+<ul>
+<li><strong>Conversational Queries:</strong> Users are asking full questions rather than typing fragmented keywords.</li>
+<li><strong>Semantic Context:</strong> Search engines now prioritize the "why" behind a query.</li>
+<li><strong>Value-Density:</strong> AI can summarize content, making fluff obsolete.</li>
+</ul>
+<p>To succeed in 2025, marketers must pivot their strategies to focus on technical authority and original research that AI cannot simply replicate...</p>
+<div class="mt-8 p-4 bg-surface-container-high rounded-xl border border-outline-variant/20">
+<span class="font-label-caps text-[10px] text-outline mb-2 block">AI PROMPT USED:</span>
+<p class="text-[12px] italic text-on-surface-variant">"Write a comprehensive thought-leadership piece on SEO evolution in the age of generative AI, focusing on B2B SaaS strategies..."</p>
+</div>
+</div>
+<!-- Mock Markdown for 'infographic-1' -->
+<div class="hidden" id="preview-infographic-1">
+<h1>Q3 Trends: Visual Summary</h1>
+<p>Our AI analysis of 2.5M interaction points across 12 channels has identified three dominant trends for the upcoming quarter.</p>
+<div class="space-y-4 mt-6">
+<div class="flex items-center gap-4 p-3 bg-secondary/5 border border-secondary/20 rounded-xl">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+<div>
+<div class="font-bold text-on-surface">Hyper-Personalization</div>
+<div class="text-[12px] text-on-surface-variant">+42% engagement lift</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-secondary/5 border border-secondary/20 rounded-xl">
+<span class="material-symbols-outlined text-secondary">video_camera_front</span>
+<div>
+<div class="font-bold text-on-surface">Short-Form Saturation</div>
+<div class="text-[12px] text-on-surface-variant">-12% reach vs Q2</div>
+</div>
+</div>
+</div>
+<p class="mt-6">Conclusion: The data suggests a return to high-quality, authentic long-form visual assets to combat short-form fatigue.</p>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant/20 bg-surface-container-low/50">
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 bg-primary text-on-primary rounded-xl font-button text-[14px] hover:brightness-110 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+                                    Edit in AI Editor
+                                </button>
+<button class="p-3 bg-surface-container-high text-on-surface-variant rounded-xl border border-outline-variant/30 hover:text-primary hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Suppression Check: As this is a task-focused internal app screen, global footer is hidden for canvas focus -->
+<script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursor-ring');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            // Lagging ring effect
+            ring.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
+        });
+
+        // Content Selection and Preview Logic
+        function selectItem(id) {
+            // Remove previous active styles from cards (simplified for demo)
+            document.querySelectorAll('.glass-card').forEach(card => {
+                card.classList.remove('border-primary/50', 'bg-primary/5');
+            });
+            
+            // Update preview container
+            const placeholder = document.getElementById('preview-placeholder');
+            const blog1 = document.getElementById('preview-blog-1');
+            const info1 = document.getElementById('preview-infographic-1');
+
+            placeholder.classList.add('hidden');
+            blog1.classList.add('hidden');
+            info1.classList.add('hidden');
+
+            if (id === 'blog-1') {
+                blog1.classList.remove('hidden');
+            } else if (id === 'infographic-1') {
+                info1.classList.remove('hidden');
+            } else {
+                placeholder.classList.remove('hidden');
+            }
+
+            // Animate transition
+            const container = document.getElementById('preview-content');
+            container.classList.add('opacity-0');
+            setTimeout(() => {
+                container.classList.remove('opacity-0');
+                container.classList.add('transition-opacity', 'duration-300');
+            }, 50);
+        }
+
+        // Card Tilt Micro-interaction
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)`;
+            });
+        });
+    </script>
+</body></html>

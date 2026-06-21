@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aetheris AI | Agent Control Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#305ea3",
+                        "on-primary-container": "#0a4488",
+                        "primary-fixed-dim": "#aac7ff",
+                        "outline-variant": "#434751",
+                        "primary-container": "#8ab4ff",
+                        "secondary-fixed-dim": "#4ddcc6",
+                        "surface": "#111318",
+                        "surface-container-lowest": "#0c0e13",
+                        "tertiary-fixed": "#ffdea2",
+                        "on-surface": "#e2e2e8",
+                        "on-primary": "#002f65",
+                        "tertiary-container": "#deac3e",
+                        "tertiary": "#fcc757",
+                        "secondary-fixed": "#6ef9e2",
+                        "on-secondary": "#003730",
+                        "surface-bright": "#37393e",
+                        "secondary": "#4ddcc6",
+                        "inverse-on-surface": "#2f3035",
+                        "on-background": "#e2e2e8",
+                        "surface-container": "#1e2024",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed-dim": "#f3bf4f",
+                        "inverse-surface": "#e2e2e8",
+                        "on-tertiary-container": "#5b4100",
+                        "outline": "#8d909c",
+                        "surface-tint": "#aac7ff",
+                        "on-secondary-fixed-variant": "#005047",
+                        "on-tertiary-fixed": "#261900",
+                        "surface-container-high": "#282a2f",
+                        "on-secondary-fixed": "#00201b",
+                        "on-tertiary-fixed-variant": "#5c4200",
+                        "surface-container-low": "#1a1c20",
+                        "on-primary-fixed": "#001b3e",
+                        "surface-container-highest": "#33353a",
+                        "primary-fixed": "#d7e3ff",
+                        "primary": "#b8d0ff",
+                        "error-container": "#93000a",
+                        "surface-dim": "#111318",
+                        "secondary-container": "#00b4a0",
+                        "on-surface-variant": "#c3c6d2",
+                        "on-primary-fixed-variant": "#0d4689",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#003f37",
+                        "on-tertiary": "#402d00",
+                        "background": "#111318",
+                        "surface-variant": "#33353a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "container-max": "1280px",
+                        "section-gap": "80px",
+                        "stack-sm": "8px",
+                        "margin-x": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "button": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Instrument Serif"],
+                        "display-lg": ["Instrument Serif"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Instrument Serif"],
+                        "label-caps": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "button": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; filter: blur(12px); }
+            50% { opacity: 0.8; filter: blur(20px); }
+        }
+        .glow-active {
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+        .pipeline-line {
+            background: linear-gradient(90deg, transparent, #4ddcc6, transparent);
+            background-size: 200% 100%;
+            animation: flow 2s infinite linear;
+        }
+        @keyframes flow {
+            from { background-position: 200% 0; }
+            to { background-position: -200% 0; }
+        }
+        .glass-card {
+            background: rgba(19, 26, 34, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(67, 71, 81, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(77, 220, 198, 0.5);
+            transform: translateY(-2px);
+        }
+        .custom-cursor-ring {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #b8d0ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            transition: transform 0.1s ease-out, border-color 0.3s;
+            z-index: 9999;
+        }
+        .custom-cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #b8d0ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(77, 220, 198, 0.2); border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden selection:bg-secondary/30">
+<!-- Atmospheric Particles -->
+<div class="fixed inset-0 pointer-events-none opacity-30 z-0">
+
+</div>
+<!-- Custom Cursor -->
+<div class="custom-cursor-ring" id="cursor-ring"></div>
+<div class="custom-cursor-dot" id="cursor-dot"></div>
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full flex flex-col z-40 bg-surface-container-lowest border-r border-outline-variant/20 w-64">
+<div class="p-6 flex flex-col gap-1">
+<h2 class="font-headline-sm text-headline-sm text-primary">Aetheris Core</h2>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary animate-ping"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">AI ACTIVE</span>
+</div>
+</div>
+<nav class="flex-1 px-3 py-4 space-y-2">
+<!-- Navigation Items Mapping from JSON -->
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-caps text-label-caps">Calendar</span>
+</a>
+<!-- ACTIVE ITEM: Agents -->
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-secondary border-l-2 border-secondary bg-secondary/5 shadow-[inset_10px_0_15px_-10px_rgba(77,220,198,0.2)] translate-x-1" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-caps text-label-caps">Agents</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-caps text-label-caps">Content</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-label-caps text-label-caps">Integrations</span>
+</a>
+<a class="group flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="px-6 py-8">
+<button class="w-full py-4 glass-card rounded-full text-secondary font-button text-button border border-secondary/30 hover:bg-secondary/10 transition-all">
+                New Campaign
+            </button>
+</div>
+<div class="mt-auto p-4 border-t border-outline-variant/10">
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 p-gutter h-screen flex flex-col relative z-10 overflow-hidden">
+<!-- Header -->
+<header class="flex justify-between items-end mb-8">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface leading-none">Agent Control Center</h1>
+<p class="font-body-lg text-on-surface-variant mt-2">Active Pipeline: <span class="text-secondary font-mono">Q4_GLOBAL_CAMPAIGN_V2</span></p>
+</div>
+<div class="flex items-center gap-stack-md bg-surface-container-high/40 p-4 rounded-xl border border-outline-variant/30 backdrop-blur-md">
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-on-surface-variant">PIPELINE HEALTH</div>
+<div class="text-secondary font-mono font-bold">98.4%</div>
+</div>
+<div class="w-px h-8 bg-outline-variant/30"></div>
+<div class="text-right">
+<div class="font-label-caps text-label-caps text-on-surface-variant">EST. COMPLETION</div>
+<div class="text-on-surface font-mono">14:02:45</div>
+</div>
+</div>
+</header>
+<!-- Pipeline Visual (Bento Grid Style for Layout) -->
+<div class="flex-1 grid grid-rows-2 gap-gutter min-h-0">
+<!-- Hero Pipeline Visualizer -->
+<section class="glass-card rounded-3xl p-8 flex items-center justify-center relative overflow-hidden">
+<!-- Background Mesh for Pipeline -->
+<div class="absolute inset-0 opacity-20">
+
+</div>
+<!-- Animated Nodes Container -->
+<div class="relative w-full max-w-5xl flex items-center justify-between z-10">
+<!-- Node 1: Strategy -->
+<div class="flex flex-col items-center gap-4 group cursor-pointer" data-tilt="">
+<div class="w-20 h-20 rounded-2xl flex items-center justify-center bg-primary/10 border border-primary shadow-[0_0_20px_rgba(184,208,255,0.3)]">
+<span class="material-symbols-outlined text-4xl text-primary" data-weight="fill">verified</span>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-label-caps text-primary">STRATEGY</span>
+<div class="text-[10px] text-primary/60 font-mono mt-1 uppercase">COMPLETE</div>
+</div>
+</div>
+<div class="flex-1 h-px pipeline-line mx-4"></div>
+<!-- Node 2: Research -->
+<div class="flex flex-col items-center gap-4 group cursor-pointer" data-tilt="">
+<div class="w-20 h-20 rounded-2xl flex items-center justify-center bg-primary/10 border border-primary shadow-[0_0_20px_rgba(184,208,255,0.3)]">
+<span class="material-symbols-outlined text-4xl text-primary" data-weight="fill">verified</span>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-label-caps text-primary">RESEARCH</span>
+<div class="text-[10px] text-primary/60 font-mono mt-1 uppercase">COMPLETE</div>
+</div>
+</div>
+<div class="flex-1 h-1 bg-secondary/20 relative mx-4">
+<div class="absolute inset-0 pipeline-line"></div>
+</div>
+<!-- Node 3: Writing (Active) -->
+<div class="flex flex-col items-center gap-4 relative">
+<div class="absolute -inset-8 bg-secondary/10 rounded-full blur-2xl animate-pulse"></div>
+<div class="w-28 h-28 rounded-3xl flex items-center justify-center bg-secondary/20 border-2 border-secondary shadow-[0_0_40px_rgba(77,220,198,0.4)] relative z-10">
+<div class="absolute inset-0 rounded-3xl animate-ping border border-secondary opacity-30"></div>
+<span class="material-symbols-outlined text-5xl text-secondary" data-weight="fill">edit_note</span>
+<div class="absolute -top-3 -right-3 bg-secondary text-on-secondary text-[10px] font-bold px-2 py-1 rounded-full shadow-lg">50%</div>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-label-caps text-secondary">WRITING</span>
+<div class="text-[10px] text-secondary font-mono mt-1 uppercase">IN PROGRESS</div>
+</div>
+</div>
+<div class="flex-1 h-px bg-outline-variant/30 mx-4"></div>
+<!-- Node 4: Design -->
+<div class="flex flex-col items-center gap-4 group opacity-50 filter grayscale transition-all hover:grayscale-0 hover:opacity-100 cursor-pointer" data-tilt="">
+<div class="w-20 h-20 rounded-2xl flex items-center justify-center bg-surface-container-highest border border-outline-variant transition-colors hover:border-secondary">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">palette</span>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">DESIGN</span>
+<div class="text-[10px] text-on-surface-variant/40 font-mono mt-1 uppercase">QUEUED</div>
+</div>
+</div>
+<div class="flex-1 h-px bg-outline-variant/30 mx-4"></div>
+<!-- Node 5: Distribution -->
+<div class="flex flex-col items-center gap-4 group opacity-50 filter grayscale transition-all hover:grayscale-0 hover:opacity-100 cursor-pointer" data-tilt="">
+<div class="w-20 h-20 rounded-2xl flex items-center justify-center bg-surface-container-highest border border-outline-variant transition-colors hover:border-secondary">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">hub</span>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">DISTRIBUTION</span>
+<div class="text-[10px] text-on-surface-variant/40 font-mono mt-1 uppercase">PENDING</div>
+</div>
+</div>
+</div>
+<!-- Floating Metric Labels -->
+<div class="absolute bottom-6 left-8 flex gap-8">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant">SESSION TOKENS</span>
+<span class="font-mono text-lg text-primary">124.5k</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant">SESSION COST</span>
+<span class="font-mono text-lg text-secondary">$14.02</span>
+</div>
+</div>
+<div class="absolute bottom-6 right-8 flex gap-4">
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-variant border border-outline-variant/30 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">pause</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-variant border border-outline-variant/30 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">replay</span>
+</button>
+<button class="p-2 rounded-lg bg-error-container/20 hover:bg-error-container border border-error/30 transition-colors text-error">
+<span class="material-symbols-outlined">stop</span>
+</button>
+</div>
+</section>
+<!-- Bottom Panels (Logs & Agent Specifics) -->
+<div class="grid grid-cols-3 gap-gutter min-h-0">
+<!-- Terminal Log Stream -->
+<div class="col-span-2 glass-card rounded-2xl overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-low/50">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></div>
+<span class="font-label-caps text-label-caps">LIVE CORE LOGS</span>
+</div>
+<div class="flex gap-4">
+<span class="font-mono text-[10px] text-on-surface-variant/50">AUTO-SCROLL: ON</span>
+<span class="material-symbols-outlined text-xs cursor-pointer hover:text-secondary transition-colors">download</span>
+</div>
+</div>
+<div class="p-6 font-mono text-xs overflow-y-auto flex-1 space-y-1.5" id="log-terminal">
+<div class="flex gap-4">
+<span class="text-on-surface-variant/40">[14:02:11]</span>
+<span class="px-1.5 rounded bg-primary/10 text-primary uppercase text-[9px]">Strategy</span>
+<span class="text-on-surface-variant">Context vector injection successful...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/40">[14:02:15]</span>
+<span class="px-1.5 rounded bg-primary/10 text-primary uppercase text-[9px]">Research</span>
+<span class="text-on-surface-variant">Scraping competitor ad-library: 42 targets identified.</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/40">[14:02:30]</span>
+<span class="px-1.5 rounded bg-secondary/10 text-secondary uppercase text-[9px]">Writing</span>
+<span class="text-on-surface-variant">Initiating semantic structure for "Visual Storytelling" module...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/40">[14:02:45]</span>
+<span class="px-1.5 rounded bg-secondary/10 text-secondary uppercase text-[9px]">Writing</span>
+<span class="text-secondary">Generating headlines (3/10) using Model: Aether-70B-Turbo...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/40">[14:02:51]</span>
+<span class="px-1.5 rounded bg-secondary/10 text-secondary uppercase text-[9px]">Writing</span>
+<span class="text-on-surface-variant">Processing tone match: "High-end cinematic SaaS"...</span>
+</div>
+<div class="flex gap-4 animate-pulse">
+<span class="text-on-surface-variant/40">[14:03:02]</span>
+<span class="px-1.5 rounded bg-secondary/10 text-secondary uppercase text-[9px]">Writing</span>
+<span class="text-secondary font-bold">Optimizing draft for conversion efficiency...</span>
+</div>
+</div>
+</div>
+<!-- Current Agent Specs Card -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-secondary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">settings_input_component</span>
+                            ACTIVE AGENT SPECS
+                        </div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Creative Copywriter V2</h3>
+<p class="text-on-surface-variant text-sm mt-2">Specializing in persuasive narrative and conversion-optimized ad copy.</p>
+<div class="mt-6 space-y-4">
+<div class="flex justify-between items-end border-b border-outline-variant/10 pb-2">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Foundation Model</span>
+<span class="font-mono text-sm text-primary">Aetheris-Prime-4</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/10 pb-2">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Temperature</span>
+<span class="font-mono text-sm text-on-surface">0.85 (Dynamic)</span>
+</div>
+<div class="flex justify-between items-end border-b border-outline-variant/10 pb-2">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Context Window</span>
+<span class="font-mono text-sm text-on-surface">128k Tokens</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-4 flex items-center gap-4 border border-outline-variant/30">
+<div class="w-12 h-12 rounded-lg overflow-hidden bg-surface-bright">
+<img class="w-full h-full object-cover" data-alt="A macro close-up of a high-tech synthetic retina glowing with cyan data patterns. The style is futuristic and cinematic, featuring shallow depth of field and sharp crystalline edges. The lighting is cool-toned with electric blue accents against a deep charcoal background, conveying ultimate machine intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-VWUAeEJKWqHpPOO-o2cXwK006PNDk6KSVc5NtMT9qqRuGJCyUk9JNbi3274uvLTCjdmkD9GpNjo3xbNFblm4V-LVEcFP53zGis65a4sgT4iMJu6g7HcJDkScGIXNzWjtppH3OgQ_Us-1S7ho8NXCXHTMi4lORqTP3wCLl-VpRoQqyjrv4-ppst6Wl7A7nXrTk2e1RweOHTxWrD7FpuE8oNt6BXWiy1eO7sj_5XOT12wLUjBWiQbgPOWO9b33ba0NTs6YD_gSEpA4"/>
+</div>
+<div>
+<div class="font-label-caps text-[10px] text-secondary">AGENT IDENTITY</div>
+<div class="text-sm font-bold text-on-surface">ID: WRITER_0X44</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Custom Cursor Logic
+        const cursorRing = document.getElementById('cursor-ring');
+        const cursorDot = document.getElementById('cursor-dot');
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX - 4 + 'px';
+            cursorDot.style.top = mouseY - 4 + 'px';
+        });
+
+        function animateRing() {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            cursorRing.style.left = ringX - 16 + 'px';
+            cursorRing.style.top = ringY - 16 + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        // 3D Tilt Logic
+        document.querySelectorAll('[data-tilt]').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const tiltX = (y - centerY) / 5;
+                const tiltY = (centerX - x) / 5;
+                el.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.05)`;
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+
+        // Simple Log Streamer Simulation
+        const terminal = document.getElementById('log-terminal');
+        const logs = [
+            "Synthesizing persona alignment data...",
+            "Context buffer cleared. New task assigned.",
+            "Analyzing audience sentiment clusters...",
+            "Writing module: Batch 2 complete. High performance detected.",
+            "Token cost updated for session.",
+            "Agent WRITER_0X44 requesting design feedback..."
+        ];
+
+        setInterval(() => {
+            const div = document.createElement('div');
+            div.className = 'flex gap-4 opacity-0 transition-opacity duration-500';
+            const timestamp = new Date().toLocaleTimeString('en-GB', { hour12: false });
+            div.innerHTML = `
+                <span class="text-on-surface-variant/40">[${timestamp}]</span>
+                <span class="px-1.5 rounded bg-secondary/10 text-secondary uppercase text-[9px]">SYSTEM</span>
+                <span class="text-on-surface-variant">${logs[Math.floor(Math.random() * logs.length)]}</span>
+            `;
+            terminal.appendChild(div);
+            setTimeout(() => div.classList.remove('opacity-0'), 100);
+            terminal.scrollTop = terminal.scrollHeight;
+            if(terminal.children.length > 50) terminal.removeChild(terminal.children[0]);
+        }, 4000);
+    </script>
+</body></html>

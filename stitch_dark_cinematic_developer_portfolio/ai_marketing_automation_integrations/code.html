@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Integrations | Aetheris AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "inverse-primary": "#305ea3",
+                  "on-primary-container": "#0a4488",
+                  "primary-fixed-dim": "#aac7ff",
+                  "outline-variant": "#434751",
+                  "primary-container": "#8ab4ff",
+                  "secondary-fixed-dim": "#4ddcc6",
+                  "surface": "#111318",
+                  "surface-container-lowest": "#0c0e13",
+                  "tertiary-fixed": "#ffdea2",
+                  "on-surface": "#e2e2e8",
+                  "on-primary": "#002f65",
+                  "tertiary-container": "#deac3e",
+                  "tertiary": "#fcc757",
+                  "secondary-fixed": "#6ef9e2",
+                  "on-secondary": "#003730",
+                  "surface-bright": "#37393e",
+                  "secondary": "#4ddcc6",
+                  "inverse-on-surface": "#2f3035",
+                  "on-background": "#e2e2e8",
+                  "surface-container": "#1e2024",
+                  "on-error": "#690005",
+                  "error": "#ffb4ab",
+                  "tertiary-fixed-dim": "#f3bf4f",
+                  "inverse-surface": "#e2e2e8",
+                  "on-tertiary-container": "#5b4100",
+                  "outline": "#8d909c",
+                  "surface-tint": "#aac7ff",
+                  "on-secondary-fixed-variant": "#005047",
+                  "on-tertiary-fixed": "#261900",
+                  "surface-container-high": "#282a2f",
+                  "on-secondary-fixed": "#00201b",
+                  "on-tertiary-fixed-variant": "#5c4200",
+                  "surface-container-low": "#1a1c20",
+                  "on-primary-fixed": "#001b3e",
+                  "surface-container-highest": "#33353a",
+                  "primary-fixed": "#d7e3ff",
+                  "primary": "#b8d0ff",
+                  "error-container": "#93000a",
+                  "surface-dim": "#111318",
+                  "secondary-container": "#00b4a0",
+                  "on-surface-variant": "#c3c6d2",
+                  "on-primary-fixed-variant": "#0d4689",
+                  "on-error-container": "#ffdad6",
+                  "on-secondary-container": "#003f37",
+                  "on-tertiary": "#402d00",
+                  "background": "#111318",
+                  "surface-variant": "#33353a"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "spacing": {
+                  "stack-md": "16px",
+                  "stack-lg": "32px",
+                  "container-max": "1280px",
+                  "section-gap": "80px",
+                  "stack-sm": "8px",
+                  "margin-x": "32px",
+                  "gutter": "24px"
+          },
+          "fontFamily": {
+                  "button": ["Inter"],
+                  "body-lg": ["Inter"],
+                  "headline-md": ["Instrument Serif"],
+                  "display-lg-mobile": ["Instrument Serif"],
+                  "display-lg": ["Instrument Serif"],
+                  "body-md": ["Inter"],
+                  "headline-sm": ["Instrument Serif"],
+                  "label-caps": ["Inter"]
+          },
+          "fontSize": {
+                  "button": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                  "headline-md": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                  "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                  "display-lg": ["64px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                  "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                  "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                  "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      cursor: none;
+      background-color: #111318;
+      overflow-x: hidden;
+    }
+    .custom-cursor {
+      width: 8px;
+      height: 8px;
+      background: #b8d0ff;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      width: 32px;
+      height: 32px;
+      border: 1px solid #4ddcc6;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: transform 0.15s ease-out, border-color 0.3s ease;
+    }
+    .glass-card {
+      background: rgba(19, 26, 34, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(67, 71, 81, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .glass-card:hover {
+      transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+      border-color: rgba(77, 220, 198, 0.4);
+      box-shadow: 0 0 30px rgba(77, 220, 198, 0.05);
+    }
+    .status-ping {
+      position: relative;
+    }
+    .status-ping::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      border-radius: inherit;
+      animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    @keyframes ping {
+      75%, 100% { transform: scale(2.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background">
+<div class="custom-cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+<!-- Background Mesh -->
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 blur-[100px] rounded-full"></div>
+</div>
+<!-- SideNavBar: Fixed Shell Layout -->
+<aside class="fixed left-0 top-0 h-full w-64 flex flex-col z-40 bg-surface-container-lowest border-r border-outline-variant/20">
+<div class="p-stack-lg">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary font-headline-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary tracking-tight">Aetheris Core</h1>
+<div class="flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary status-ping"></div>
+<span class="font-label-caps text-[10px] text-secondary opacity-80">AI ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 py-2 space-y-1">
+<div class="font-label-caps text-on-surface-variant px-3 py-2 opacity-50 mb-2">Main Menu</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span class="font-label-caps text-label-caps">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span class="font-label-caps text-label-caps">Agents</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-label-caps text-label-caps">Content</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+<!-- Active Item: Integrations -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary border-l-2 border-secondary bg-secondary/5 shadow-[inset_10px_0_15px_-10px_rgba(77,220,198,0.2)] translate-x-1" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="font-label-caps text-label-caps">Integrations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-variant/10 hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto space-y-4">
+<button class="w-full py-3 bg-secondary/10 border border-secondary/30 rounded-xl font-label-caps text-secondary hover:bg-secondary/20 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+        New Campaign
+      </button>
+<div class="border-t border-outline-variant/20 pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-label-caps text-label-caps">Help</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen px-margin-x pt-stack-lg pb-section-gap">
+<!-- Top Bar -->
+<header class="flex justify-between items-center mb-stack-lg">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Integration Hub</h2>
+<p class="font-body-md text-on-surface-variant">Connect your marketing stack for autonomous execution.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border border-surface bg-surface-variant" data-alt="A futuristic circular avatar representing an AI user in a sleek professional setting, lit by soft cyan and navy blue studio lighting with high-end texture." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJ7S0zsOBvdfX7DaipH0awBkDGYwdbDnpfi3dBDCcDg3P8vjTq-xL6Ahx3JQHODmaKEEPH27f1TPJ3IAoTYxfBRvN0QrUuiDWlx9VgQeWBKci9l2neYjjvCvkVulcgPX6Olt3-x0giNbSfNH-Gucu7gaJPJieQFS69sLAzdpNPPOCbC_dwtai2CqY44z-QX2aBF1UR0YN0p43QnCcRc9TADREw_Z0MsipJFeiNKrGl0w5JvTX1aXwMoqKDb0yxeEpxQnrE6E_GWTDg')"></div>
+</div>
+<div class="h-10 w-[1px] bg-outline-variant/30"></div>
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+</div>
+</header>
+<!-- Bento Grid Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- HubSpot Card (Connected) -->
+<div class="glass-card rounded-xl p-stack-md flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-[#FF7A59]/10 border border-[#FF7A59]/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#FF7A59] text-[28px]" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary status-ping"></div>
+<span class="font-label-caps text-[10px] text-secondary">Connected</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">HubSpot</h3>
+<p class="font-body-md text-on-surface-variant text-sm">CRM &amp; Content Synchronization</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-[10px] text-on-surface-variant">API USAGE</span>
+<span class="font-label-caps text-[10px] text-secondary">84%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[84%] shadow-[0_0_10px_rgba(77,220,198,0.5)]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-outline-variant/10">
+<div class="flex flex-col">
+<span class="font-label-caps text-[9px] text-on-surface-variant">LAST SYNC</span>
+<span class="font-body-md text-[12px] text-on-surface">2 minutes ago</span>
+</div>
+<button class="px-4 py-2 bg-surface-container-highest border border-outline-variant/30 rounded-lg font-button text-button text-on-surface hover:bg-surface-variant transition-colors">Configure</button>
+</div>
+</div>
+<!-- Buffer Card (Not Connected) -->
+<div class="glass-card rounded-xl p-stack-md flex flex-col gap-4 opacity-80 hover:opacity-100 transition-opacity">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-[#2C4BFF]/10 border border-[#2C4BFF]/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#2C4BFF] text-[28px]">dynamic_feed</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-on-surface-variant/10 border border-outline-variant/20">
+<div class="w-1.5 h-1.5 rounded-full bg-outline"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">Not Connected</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Buffer</h3>
+<p class="font-body-md text-on-surface-variant text-sm">Social Media Scheduling</p>
+</div>
+<div class="py-4 text-center">
+<p class="font-body-md text-xs text-on-surface-variant/60 italic">Automate post distribution across all channels.</p>
+</div>
+<div class="mt-auto">
+<button class="w-full py-3 bg-gradient-to-r from-primary to-secondary rounded-lg font-button text-button text-on-primary font-bold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_4px_15px_rgba(184,208,255,0.2)]">
+            Connect Integration
+          </button>
+</div>
+</div>
+<!-- Google Analytics Card (Connected) -->
+<div class="glass-card rounded-xl p-stack-md flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-[#E37400]/10 border border-[#E37400]/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-[#E37400] text-[28px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary status-ping"></div>
+<span class="font-label-caps text-[10px] text-secondary">Connected</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">GA4</h3>
+<p class="font-body-md text-on-surface-variant text-sm">Performance Tracking &amp; ROI</p>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="font-label-caps text-[10px] text-on-surface-variant">API USAGE</span>
+<span class="font-label-caps text-[10px] text-secondary">12%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[12%] shadow-[0_0_10px_rgba(77,220,198,0.5)]"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-outline-variant/10">
+<div class="flex flex-col">
+<span class="font-label-caps text-[9px] text-on-surface-variant">LAST SYNC</span>
+<span class="font-body-md text-[12px] text-on-surface">Today, 08:45 AM</span>
+</div>
+<button class="px-4 py-2 bg-surface-container-highest border border-outline-variant/30 rounded-lg font-button text-button text-on-surface hover:bg-surface-variant transition-colors">Configure</button>
+</div>
+</div>
+<!-- Salesforce (Injected Component) -->
+<div class="glass-card rounded-xl p-stack-md flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[28px]">cloud_sync</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-on-surface-variant/10 border border-outline-variant/20">
+<div class="w-1.5 h-1.5 rounded-full bg-outline"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant">Available</span>
+</div>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Salesforce</h3>
+<p class="font-body-md text-on-surface-variant text-sm">Enterprise Sales Intelligence</p>
+</div>
+<div class="mt-auto pt-6">
+<button class="w-full py-3 border border-outline-variant rounded-lg font-button text-button text-on-surface hover:bg-surface-variant/50 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            Add to Stack
+          </button>
+</div>
+</div>
+<!-- Custom Webhook Card -->
+<div class="glass-card rounded-xl p-stack-md flex flex-col gap-4 border-dashed">
+<div class="flex items-center gap-4 h-full flex-col justify-center text-center py-6">
+<div class="w-14 h-14 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[32px]">webhook</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Custom Webhook</h3>
+<p class="font-body-md text-on-surface-variant text-xs mt-1">Connect any tool via HTTP REST API</p>
+</div>
+<button class="font-label-caps text-secondary underline underline-offset-4 text-[11px] mt-2 hover:text-primary transition-colors">Read API Docs</button>
+</div>
+</div>
+</section>
+<!-- Detailed Stats Row -->
+<section class="mt-section-gap">
+<div class="glass-card rounded-2xl overflow-hidden border border-outline-variant/20">
+<div class="p-stack-md bg-surface-container-high/50 flex items-center justify-between border-b border-outline-variant/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">monitoring</span>
+<span class="font-label-caps text-label-caps text-on-surface">Live Data Streams</span>
+</div>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 rounded bg-secondary/10 border border-secondary/20 text-[10px] font-label-caps text-secondary uppercase">2 Active</span>
+<span class="px-2 py-0.5 rounded bg-outline-variant/10 border border-outline-variant/20 text-[10px] font-label-caps text-on-surface-variant uppercase">3 Pending</span>
+</div>
+</div>
+<div class="p-0">
+<div class="grid grid-cols-1 md:grid-cols-4 divide-x divide-outline-variant/10">
+<div class="p-stack-md hover:bg-surface-variant/5 transition-colors group">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">DATA PROCESSED</span>
+<div class="text-2xl font-headline-sm text-on-surface">1.2 TB</div>
+<div class="text-xs text-secondary mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+14% this month</span>
+</div>
+</div>
+<div class="p-stack-md hover:bg-surface-variant/5 transition-colors">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">AVG RESPONSE</span>
+<div class="text-2xl font-headline-sm text-on-surface">42 ms</div>
+<div class="text-xs text-primary mt-1">Low Latency Stable</div>
+</div>
+<div class="p-stack-md hover:bg-surface-variant/5 transition-colors">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">FAILED CALLS</span>
+<div class="text-2xl font-headline-sm text-on-surface">0.02%</div>
+<div class="text-xs text-on-surface-variant mt-1">Within SLA threshold</div>
+</div>
+<div class="p-stack-md hover:bg-surface-variant/5 transition-colors">
+<span class="font-label-caps text-[10px] text-on-surface-variant block mb-1">AUTONOMOUS SYNC</span>
+<div class="text-2xl font-headline-sm text-on-surface">Enabled</div>
+<div class="text-xs text-secondary mt-1 flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary status-ping"></div>
+                AI Controller Active
+              </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Pinned at Bottom) -->
+<footer class="ml-64 bg-surface border-t border-outline-variant/20 py-12 px-margin-x">
+<div class="max-w-container-max mx-auto flex flex-col items-center gap-stack-lg">
+<div class="font-display-lg text-display-lg opacity-10 uppercase tracking-widest pointer-events-none select-none">
+        AETHERIS AI
+      </div>
+<div class="flex gap-stack-lg">
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">API Status</a>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-60">
+        © 2024 Aetheris AI. Never Miss A Posting Time.
+      </p>
+</div>
+</footer>
+<script>
+    // Custom Cursor Logic
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursor-ring');
+    
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
+      
+      cursor.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
+      
+      // Lagging ring effect
+      setTimeout(() => {
+        cursorRing.style.transform = `translate(${x - 16}px, ${y - 16}px)`;
+      }, 50);
+    });
+
+    // Hover effect for interactive elements
+    const links = document.querySelectorAll('a, button, .glass-card');
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        cursorRing.style.borderColor = '#b8d0ff';
+        cursorRing.style.transform += ' scale(1.5)';
+      });
+      link.addEventListener('mouseleave', () => {
+        cursorRing.style.borderColor = '#4ddcc6';
+        cursorRing.style.transform = cursorRing.style.transform.replace(' scale(1.5)', '');
+      });
+    });
+
+    // Simple 3D Card Tilt Micro-interaction
+    const cards = document.querySelectorAll('.glass-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)`;
+      });
+    });
+  </script>
+</body></html>

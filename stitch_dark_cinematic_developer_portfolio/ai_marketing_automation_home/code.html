@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aetheris AI | One Idea In. A Full Campaign Out.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Style Context Injection -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#305ea3",
+                    "on-primary-container": "#0a4488",
+                    "primary-fixed-dim": "#aac7ff",
+                    "outline-variant": "#434751",
+                    "primary-container": "#8ab4ff",
+                    "secondary-fixed-dim": "#4ddcc6",
+                    "surface": "#111318",
+                    "surface-container-lowest": "#0c0e13",
+                    "tertiary-fixed": "#ffdea2",
+                    "on-surface": "#e2e2e8",
+                    "on-primary": "#002f65",
+                    "tertiary-container": "#deac3e",
+                    "tertiary": "#fcc757",
+                    "secondary-fixed": "#6ef9e2",
+                    "on-secondary": "#003730",
+                    "surface-bright": "#37393e",
+                    "secondary": "#4ddcc6",
+                    "inverse-on-surface": "#2f3035",
+                    "on-background": "#e2e2e8",
+                    "surface-container": "#1e2024",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#f3bf4f",
+                    "inverse-surface": "#e2e2e8",
+                    "on-tertiary-container": "#5b4100",
+                    "outline": "#8d909c",
+                    "surface-tint": "#aac7ff",
+                    "on-secondary-fixed-variant": "#005047",
+                    "on-tertiary-fixed": "#261900",
+                    "surface-container-high": "#282a2f",
+                    "on-secondary-fixed": "#00201b",
+                    "on-tertiary-fixed-variant": "#5c4200",
+                    "surface-container-low": "#1a1c20",
+                    "on-primary-fixed": "#001b3e",
+                    "surface-container-highest": "#33353a",
+                    "primary-fixed": "#d7e3ff",
+                    "primary": "#b8d0ff",
+                    "error-container": "#93000a",
+                    "surface-dim": "#111318",
+                    "secondary-container": "#00b4a0",
+                    "on-surface-variant": "#c3c6d2",
+                    "on-primary-fixed-variant": "#0d4689",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-container": "#003f37",
+                    "on-tertiary": "#402d00",
+                    "background": "#111318",
+                    "surface-variant": "#33353a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "container-max": "1280px",
+                    "section-gap": "80px",
+                    "stack-sm": "8px",
+                    "margin-x": "32px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "button": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Instrument Serif"],
+                    "display-lg-mobile": ["Instrument Serif"],
+                    "display-lg": ["Instrument Serif"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Instrument Serif"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "button": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #111318;
+            color: #e2e2e8;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        .custom-cursor {
+            width: 8px;
+            height: 8px;
+            background: #aac7ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease;
+        }
+
+        .custom-cursor-ring {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #4ddcc6;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease;
+        }
+
+        .glass {
+            backdrop-filter: blur(12px);
+            background: rgba(19, 26, 34, 0.8);
+            border: 1px solid rgba(67, 71, 81, 0.3);
+        }
+
+        .glow-cyan {
+            box-shadow: 0 0 20px rgba(77, 220, 198, 0.15);
+        }
+
+        .tilt-card {
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            transform-style: preserve-3d;
+        }
+
+        .tilt-card:hover {
+            border-color: rgba(77, 220, 198, 0.5);
+            transform: perspective(1000px) rotateX(2deg) rotateY(2deg);
+        }
+
+        @keyframes ping-slow {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .ping-dot {
+            animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .mesh-gradient {
+            background: radial-gradient(circle at 20% 30%, rgba(48, 94, 163, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(77, 220, 198, 0.1) 0%, transparent 50%);
+        }
+
+        .marquee-container {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        .pipeline-item.active {
+            border-color: #4ddcc6;
+            box-shadow: inset 0 0 15px rgba(77, 220, 198, 0.1);
+        }
+
+        .pipeline-connector {
+            background: linear-gradient(90deg, #4ddcc6, #305ea3);
+            filter: blur(1px);
+        }
+    </style>
+</head>
+<body class="font-body-md selection:bg-secondary/30">
+<!-- Custom Cursor -->
+<div class="custom-cursor" id="cursor"></div>
+<div class="custom-cursor-ring" id="cursor-ring"></div>
+<!-- Atmospheric Mesh Background -->
+<div class="fixed inset-0 mesh-gradient pointer-events-none -z-10"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full">
+<nav class="bg-surface/80 backdrop-blur-xl rounded-full mt-4 mx-auto max-w-fit px-6 py-2 border border-outline-variant/30 shadow-[0_0_20px_rgba(170,199,255,0.1)] flex items-center gap-8">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary tracking-tighter">Aetheris AI</span>
+<div class="w-1.5 h-1.5 bg-secondary rounded-full relative">
+<div class="absolute inset-0 bg-secondary rounded-full ping-dot"></div>
+</div>
+</div>
+<ul class="hidden md:flex items-center gap-6">
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-300" href="#">Platform</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-300" href="#">Solutions</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-300" href="#">Pricing</a></li>
+<li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors hover:scale-105 transition-transform duration-300" href="#">Resources</a></li>
+</ul>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant font-button text-button hover:text-primary transition-colors">Sign In</button>
+<button class="bg-primary text-on-primary font-button text-button px-5 py-2 rounded-full hover:scale-105 transition-transform active:scale-95 duration-300">Get Started</button>
+</div>
+</nav>
+</header>
+<main class="relative z-10 pt-32">
+<!-- Hero Section -->
+<section class="px-margin-x max-w-container-max mx-auto mb-section-gap overflow-visible">
+<div class="grid lg:grid-cols-2 gap-stack-lg items-center">
+<div class="flex flex-col gap-stack-md" data-aos="fade-up">
+<h1 class="font-display-lg text-display-lg-mobile lg:text-display-lg italic leading-[0.95] text-primary">
+                        One Idea In.<br/>A Full Campaign Out.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        AI agents plan, research, write, design, and publish your content — end to end, with no manual handoffs. Your marketing ecosystem, automated.
+                    </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<button class="px-8 py-4 rounded-full bg-gradient-to-r from-primary to-secondary text-on-primary font-button text-button shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all">
+                            Start Your Growth Engine
+                        </button>
+<div class="flex items-center gap-4 px-6 border border-outline-variant/30 rounded-full glass">
+<span class="material-symbols-outlined text-secondary">play_circle</span>
+<span class="font-button text-button">Watch the Engine</span>
+</div>
+</div>
+</div>
+<div class="relative group perspective-1000">
+<div class="relative w-full aspect-video rounded-xl overflow-visible transform rotate-x-6 rotate-y-6 transition-transform duration-700 group-hover:rotate-x-2 group-hover:rotate-y-2">
+<img alt="AI Marketing Pipeline Visual" class="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(77,220,198,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbB3cOPsOugzOAmT7BdcwQu_pfVospcxzsYSdtncmYXZROT6IHpeeZ3Uwe_yBgdhNkLI69m7pmX2vT0ERUhQ-NqqMK9hqrs_7HK_KD9HcnxI45EzQM7R-U4Ql5e3Dwi2fZWItvY-GhzQk-JEz2WOczZSF_B04VVs1Ag6nNm8gSP2CZmmsQYBq_FfAbByQ5UULdtbV0otP2XM2b7OfiIWPeOO_XBLd4MWmINVR-GjOwqg4Ua7c0XA4ugY4wE6w121aphaDYChoIiF3q"/>
+<!-- Floating HUD Elements -->
+<div class="absolute -top-4 -right-4 p-4 glass rounded-xl border-secondary/20 animate-pulse">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-secondary rounded-full"></div>
+<span class="font-label-caps text-label-caps text-secondary">AI ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Row -->
+<section class="border-y border-outline-variant/10 bg-surface-container-low/50 backdrop-blur-sm py-12 mb-section-gap">
+<div class="px-margin-x max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
+<div class="flex flex-col items-center text-center gap-2">
+<span class="font-display-lg text-headline-md text-secondary">5</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant">AI Agents</span>
+</div>
+<div class="flex flex-col items-center text-center gap-2">
+<span class="font-display-lg text-headline-md text-primary">30-Day</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant">Calendars in Minutes</span>
+</div>
+<div class="flex flex-col items-center text-center gap-2">
+<span class="font-display-lg text-headline-md text-secondary">3</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant">Integrated Channels</span>
+</div>
+</div>
+</section>
+<!-- How It Works (Sticky Pipeline) -->
+<section class="px-margin-x max-w-container-max mx-auto mb-section-gap">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md mb-4 text-primary">How It Works</h2>
+<p class="text-on-surface-variant font-body-lg">The autonomous assembly line for your brand.</p>
+</div>
+<div class="relative flex flex-col gap-32">
+<!-- Pipeline Path -->
+<div class="absolute left-1/2 top-0 bottom-0 w-px bg-outline-variant/20 -translate-x-1/2 hidden md:block"></div>
+<!-- Step 1: Strategy -->
+<div class="relative flex flex-col md:flex-row items-center gap-12 group">
+<div class="md:w-1/2 md:text-right">
+<span class="font-label-caps text-label-caps text-secondary">STEP 01</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Strategy Agent</h3>
+<p class="font-body-md text-on-surface-variant mt-4">Defining your brand voice, audience segments, and core messaging pillars through deep market analysis.</p>
+</div>
+<div class="relative flex-shrink-0 w-16 h-16 rounded-full glass border-secondary/50 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(77,220,198,0.2)]">
+<span class="material-symbols-outlined text-secondary">insights</span>
+</div>
+<div class="md:w-1/2"></div>
+</div>
+<!-- Step 2: Research -->
+<div class="relative flex flex-col md:flex-row-reverse items-center gap-12 group">
+<div class="md:w-1/2 md:text-left">
+<span class="font-label-caps text-label-caps text-primary">STEP 02</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Research Agent</h3>
+<p class="font-body-md text-on-surface-variant mt-4">Scouring the web for trending topics, competitor gaps, and data-backed insights to fuel high-performing content.</p>
+</div>
+<div class="relative flex-shrink-0 w-16 h-16 rounded-full glass border-primary/50 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(170,199,255,0.2)]">
+<span class="material-symbols-outlined text-primary">search</span>
+</div>
+<div class="md:w-1/2"></div>
+</div>
+<!-- Step 3: Writing -->
+<div class="relative flex flex-col md:flex-row items-center gap-12 group">
+<div class="md:w-1/2 md:text-right">
+<span class="font-label-caps text-label-caps text-secondary">STEP 03</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Writing Agent</h3>
+<p class="font-body-md text-on-surface-variant mt-4">Drafting long-form articles, social threads, and ad copy that maintains 100% brand consistency.</p>
+</div>
+<div class="relative flex-shrink-0 w-16 h-16 rounded-full glass border-secondary/50 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(77,220,198,0.2)]">
+<span class="material-symbols-outlined text-secondary">edit_note</span>
+</div>
+<div class="md:w-1/2"></div>
+</div>
+<!-- Step 4: Design -->
+<div class="relative flex flex-col md:flex-row-reverse items-center gap-12 group">
+<div class="md:w-1/2 md:text-left">
+<span class="font-label-caps text-label-caps text-primary">STEP 04</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Design Agent</h3>
+<p class="font-body-md text-on-surface-variant mt-4">Generating high-fidelity visual assets, layouts, and social cards specifically matched to your content.</p>
+</div>
+<div class="relative flex-shrink-0 w-16 h-16 rounded-full glass border-primary/50 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(170,199,255,0.2)]">
+<span class="material-symbols-outlined text-primary">palette</span>
+</div>
+<div class="md:w-1/2"></div>
+</div>
+<!-- Step 5: Distribution -->
+<div class="relative flex flex-col md:flex-row items-center gap-12 group">
+<div class="md:w-1/2 md:text-right">
+<span class="font-label-caps text-label-caps text-secondary">STEP 05</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Distribution Agent</h3>
+<p class="font-body-md text-on-surface-variant mt-4">Auto-scheduling and publishing content across HubSpot, Buffer, and social channels at peak engagement times.</p>
+</div>
+<div class="relative flex-shrink-0 w-16 h-16 rounded-full glass border-secondary/50 flex items-center justify-center z-10 shadow-[0_0_20px_rgba(77,220,198,0.2)]">
+<span class="material-symbols-outlined text-secondary">send</span>
+</div>
+<div class="md:w-1/2"></div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Modules -->
+<section class="px-margin-x max-w-container-max mx-auto mb-section-gap">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md mb-4 text-primary">Platform Modules</h2>
+<p class="text-on-surface-variant font-body-lg">Precision tools for high-velocity marketing.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 grid-rows-2 gap-gutter h-auto md:h-[800px]">
+<!-- Editorial Calendar -->
+<div class="md:col-span-8 md:row-span-1 glass rounded-xl p-stack-md tilt-card overflow-hidden group">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<h4 class="font-headline-sm text-on-surface">Editorial Calendar</h4>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">MONTHLY VIEW</span>
+</div>
+<div class="relative h-full">
+<img alt="Editorial Calendar UI" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBraCZQuAe0njE7IeUAzyMkf_k3U3JSibrZZ80S4te6EpLJvgiYMKbK9I5mE2DOQMweVTMEnezjzsk10rP4LNZdnM72GukFyrFEzSX0eS_QOCXnVDPj0w6jtNCn2B4vBpGuYAJ6zrUuzWZQDF9EdGqrOygUc6e3j18rpwyo_-fOHF-ghZZuQTf4AxbC5zqeKOcRUSY-EIfMdJYYJRt3r5bCwLsQ2ANp5UqhS4kta2zHwtUWjtiJTb9JCckYWTyTHYJx7cVrXvqXN6Nj"/>
+</div>
+</div>
+<!-- Agent Control Center -->
+<div class="md:col-span-4 md:row-span-1 glass rounded-xl p-stack-md tilt-card flex flex-col justify-between border-secondary/20">
+<div>
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+</div>
+<h4 class="font-headline-sm text-on-surface mb-2">Agent Control Center</h4>
+<p class="text-on-surface-variant text-body-md">Real-time status updates and manual override toggles for every autonomous task in your pipeline.</p>
+</div>
+<div class="mt-8 space-y-3">
+<div class="flex items-center justify-between p-3 bg-surface-container rounded-lg border border-outline-variant/30">
+<span class="text-body-md">Strategy Bot</span>
+<span class="text-[10px] bg-secondary/20 text-secondary px-2 py-0.5 rounded uppercase font-bold">Processing</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container rounded-lg border border-outline-variant/30">
+<span class="text-body-md">Writing Bot</span>
+<span class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded uppercase font-bold">Standby</span>
+</div>
+</div>
+</div>
+<!-- Content Library -->
+<div class="md:col-span-4 md:row-span-1 glass rounded-xl p-stack-md tilt-card overflow-hidden group">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-secondary">folder_special</span>
+<h4 class="font-headline-sm text-on-surface">Content Library</h4>
+</div>
+<div class="relative h-48 md:h-full">
+<img alt="Content Library UI" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiFG3BYOhNj6k78PbNhcFJ8QqHdPOsxJdCpYhQGKTcGKT4n3iqGkyUhK_5taH8ydmwM-RbzWNmCHAZ5bxdwhoNBJnpeIP7HAoYK0BND5995EVXCesU7fqegQ3ndVgdGYoiIjAbuLSAiy1acGj2_pUv9gNc3rXzZ9pN39TY8d8HhuikF7yWBrbBqCl0Um3MkujuDaABncihr-A5zzUJLMt09O1tRL2El0VsBpDkPwSSbZm-847BVXYuklXl5sIm5pa4e5kvx_ktQ0IY"/>
+</div>
+</div>
+<!-- Analytics Engine -->
+<div class="md:col-span-8 md:row-span-1 glass rounded-xl p-stack-md tilt-card overflow-hidden group">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+<h4 class="font-headline-sm text-on-surface">Analytics Engine</h4>
+</div>
+</div>
+<div class="relative h-full">
+<img alt="Analytics Dashboard UI" class="w-full h-full object-cover rounded-lg group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNxd-JOgnjBdCaWctChRuAd1HQzYFoYaLLpXTNR8uNguRu3CSR4a4YTRncykEjzjhiZu2ztQEN-DF6r9nkcIooFRnLVnniYCv5_3uViWsGDO-hxMxZBNLzbfKfhusao8Yw7ZU9887CXo12rV85g7xNPuHqXdTNc5XEPegUSbtLhaKst8GamGyUVD4-kw3Ff6deMYbceqE3IOwVl0KLSaQ4NsdoIBPUv14aN-PmkXvSzLV0eJJCyFuBnWdllMWxZ5dGGr_L7FOjj7p4"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Integrations Strip -->
+<section class="py-24 bg-surface-container-lowest/50 border-y border-outline-variant/10 overflow-hidden">
+<div class="px-margin-x max-w-container-max mx-auto text-center mb-12">
+<span class="font-label-caps text-label-caps text-on-surface-variant">CONNECT TO YOUR ECOSYSTEM</span>
+</div>
+<div class="marquee-container w-full">
+<div class="animate-scroll flex items-center gap-16 px-8">
+<!-- HubSpot -->
+<div class="flex items-center gap-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+<div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">hub</span>
+</div>
+<span class="font-headline-sm text-on-surface">HubSpot</span>
+<div class="w-2 h-2 bg-secondary rounded-full ml-2"></div>
+</div>
+<!-- Buffer -->
+<div class="flex items-center gap-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+<div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">layers</span>
+</div>
+<span class="font-headline-sm text-on-surface">Buffer</span>
+<div class="w-2 h-2 bg-secondary rounded-full ml-2"></div>
+</div>
+<!-- Google Analytics -->
+<div class="flex items-center gap-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+<div class="w-10 h-10 bg-amber-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">analytics</span>
+</div>
+<span class="font-headline-sm text-on-surface">Google Analytics</span>
+<div class="w-2 h-2 bg-secondary rounded-full ml-2"></div>
+</div>
+<!-- Salesforce -->
+<div class="flex items-center gap-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+<div class="w-10 h-10 bg-sky-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">cloud</span>
+</div>
+<span class="font-headline-sm text-on-surface">Salesforce</span>
+<div class="w-2 h-2 bg-secondary rounded-full ml-2"></div>
+</div>
+<!-- Duplicate for Marquee Loop -->
+<div class="flex items-center gap-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+<div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white">hub</span>
+</div>
+<span class="font-headline-sm text-on-surface">HubSpot</span>
+<div class="w-2 h-2 bg-secondary rounded-full ml-2"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-margin-x max-w-container-max mx-auto flex flex-col items-center gap-stack-lg py-12 border-t border-outline-variant/20">
+<div class="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<div class="flex flex-col gap-2">
+<span class="font-display-lg text-display-lg opacity-10 uppercase tracking-widest text-primary">AETHERIS</span>
+<p class="font-body-md text-body-md text-on-surface-variant">2024 Aetheris AI. Never Miss A Posting Time.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">API Status</a>
+</div>
+</div>
+<!-- Marquee Overlay Style Footer -->
+<div class="w-full h-12 overflow-hidden border-t border-outline-variant/10 flex items-center mt-12">
+<div class="animate-scroll whitespace-nowrap flex gap-12 font-label-caps text-[10px] text-on-surface-variant/40 tracking-[0.3em] uppercase">
+<span>Autonomous Pipeline Active</span>
+<span>System Health 99.9%</span>
+<span>Content Output Optimized</span>
+<span>Autonomous Pipeline Active</span>
+<span>System Health 99.9%</span>
+<span>Content Output Optimized</span>
+</div>
+</div>
+</footer>
+<script>
+        // Custom Cursor Logic
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursor-ring');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            // Lagging ring effect
+            setTimeout(() => {
+                ring.style.left = (e.clientX - 12) + 'px';
+                ring.style.top = (e.clientY - 12) + 'px';
+            }, 50);
+        });
+
+        // Interactive Cursor on Hover
+        document.querySelectorAll('a, button, .tilt-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                ring.style.transform = 'scale(1.5)';
+                ring.style.borderColor = '#b8d0ff';
+                cursor.style.backgroundColor = '#4ddcc6';
+            });
+            el.addEventListener('mouseleave', () => {
+                ring.style.transform = 'scale(1)';
+                ring.style.borderColor = '#4ddcc6';
+                cursor.style.backgroundColor = '#aac7ff';
+            });
+        });
+
+        // 3D Tilt Effect Logic
+        document.querySelectorAll('.tilt-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            });
+        });
+    </script>
+</body></html>

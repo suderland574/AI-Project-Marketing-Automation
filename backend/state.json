@@ -1,0 +1,520 @@
+{
+  "brand": {
+    "name": "AI Marketing Automation",
+    "tagline": "One idea in. A full campaign out.",
+    "audience": "Growth teams, content leaders, and solo marketers"
+  },
+  "settings": {
+    "brand_voice": "Confident, sharp, data-informed, and clear.",
+    "primary_goal": "Launch a high-performing campaign every week.",
+    "timezone": "Pakistan/lahore",
+    "publish_cadence": "4 post per week"
+  },
+  "agents": [
+    {
+      "id": "strategy",
+      "name": "Strategy Agent",
+      "role": "Plans campaigns, goals, and channel mix.",
+      "status": "active",
+      "progress": 100,
+      "queue": 2
+    },
+    {
+      "id": "research",
+      "name": "Research Agent",
+      "role": "Tracks trends, competitors, and keywords.",
+      "status": "active",
+      "progress": 100,
+      "queue": 3
+    },
+    {
+      "id": "writing",
+      "name": "Writing Agent",
+      "role": "Drafts articles, posts, and email copy.",
+      "status": "active",
+      "progress": 100,
+      "queue": 4
+    },
+    {
+      "id": "design",
+      "name": "Design Agent",
+      "role": "Builds image prompts and visual assets.",
+      "status": "active",
+      "progress": 89,
+      "queue": 1
+    },
+    {
+      "id": "distribution",
+      "name": "Distribution Agent",
+      "role": "Schedules publishing and syncs integrations.",
+      "status": "working",
+      "progress": 82,
+      "queue": 2
+    }
+  ],
+  "campaigns": [
+    {
+      "id": "camp_92b1be753a",
+      "name": "Q4 Demand Engine",
+      "objective": "Generate qualified demo requests.",
+      "channel": "Multi-channel",
+      "status": "Running",
+      "owner": "Strategy Agent",
+      "progress": 52,
+      "roi": "+8%",
+      "audience": "Marketing leaders",
+      "created_at": "2026-06-20T23:15:01+00:00"
+    },
+    {
+      "id": "camp_c71d58a679",
+      "name": "Spring Demand Sprint",
+      "objective": "Drive demos from thought leadership",
+      "channel": "Blog + LinkedIn",
+      "status": "Running",
+      "owner": "Strategy Agent",
+      "progress": 52,
+      "roi": "+8%",
+      "audience": "B2B operators",
+      "created_at": "2026-06-20T23:01:45+00:00"
+    },
+    {
+      "id": "camp_growth_launch",
+      "name": "Q3 Growth Launch",
+      "objective": "Promote the new content engine and capture demo requests.",
+      "channel": "Multi-channel",
+      "status": "Running",
+      "owner": "Strategy Agent",
+      "progress": 68,
+      "roi": "+24%",
+      "audience": "Demand gen leaders",
+      "created_at": "2026-06-12T23:01:29+00:00"
+    },
+    {
+      "id": "camp_abm_playbook",
+      "name": "ABM Playbook Series",
+      "objective": "Convert enterprise traffic through tailored thought leadership.",
+      "channel": "Blog + LinkedIn",
+      "status": "Scheduled",
+      "owner": "Writing Agent",
+      "progress": 41,
+      "roi": "+11%",
+      "audience": "B2B pipeline teams",
+      "created_at": "2026-06-16T23:01:29+00:00"
+    }
+  ],
+  "content": [
+    {
+      "id": "cont_16ccbf946e",
+      "title": "Q4 Demand Engine launch copy",
+      "type": "Campaign brief",
+      "channel": "Multi-channel",
+      "status": "Draft",
+      "updated_at": "2026-06-20T23:15:01+00:00",
+      "summary": "Generate qualified demo requests.",
+      "cta": "Review campaign",
+      "keywords": [
+        "campaign",
+        "launch",
+        "automation"
+      ]
+    },
+    {
+      "id": "cont_80e73b4867",
+      "title": "vlogs",
+      "type": "Campaign brief",
+      "channel": "instagram",
+      "status": "Draft",
+      "updated_at": "2026-06-20T23:11:05+00:00",
+      "summary": "Create a polished introduction to the automation workflow and the business case behind it.",
+      "cta": "Book a demo",
+      "keywords": []
+    },
+    {
+      "id": "cont_795fcc5e84",
+      "title": "Spring Demand Sprint launch copy",
+      "type": "Campaign brief",
+      "channel": "Blog + LinkedIn",
+      "status": "Draft",
+      "updated_at": "2026-06-20T23:01:45+00:00",
+      "summary": "Drive demos from thought leadership",
+      "cta": "Review campaign",
+      "keywords": [
+        "campaign",
+        "launch",
+        "automation"
+      ]
+    },
+    {
+      "id": "cont_hero_article",
+      "title": "The 30-Day AI Content System",
+      "type": "Blog post",
+      "channel": "Website",
+      "status": "Draft",
+      "updated_at": "2026-06-20T19:01:29+00:00",
+      "summary": "A practical framework for turning one strategy brief into a publishing calendar.",
+      "cta": "Book a demo",
+      "keywords": [
+        "ai marketing",
+        "content ops",
+        "automation"
+      ]
+    },
+    {
+      "id": "cont_social_pack",
+      "title": "Weekly Social Pack",
+      "type": "Social series",
+      "channel": "LinkedIn + X",
+      "status": "Scheduled",
+      "updated_at": "2026-06-20T14:01:29+00:00",
+      "summary": "Five channel-specific posts generated from the launch narrative.",
+      "cta": "Read the full article",
+      "keywords": [
+        "social automation",
+        "workflow",
+        "campaign"
+      ]
+    },
+    {
+      "id": "cont_newsletter",
+      "title": "Insight Loop Newsletter",
+      "type": "Newsletter",
+      "channel": "Email",
+      "status": "Published",
+      "updated_at": "2026-06-19T23:01:29+00:00",
+      "summary": "A concise roundup of the best-performing ideas from the editorial calendar.",
+      "cta": "Get the template",
+      "keywords": [
+        "newsletter",
+        "retention",
+        "email"
+      ]
+    }
+  ],
+  "calendar": [
+    {
+      "date": "2026-06-24",
+      "title": "Q4 Demand Engine asset 5",
+      "channel": "Multi-channel",
+      "status": "Planned",
+      "campaign_id": "camp_92b1be753a"
+    },
+    {
+      "date": "2026-06-23",
+      "title": "Q4 Demand Engine asset 4",
+      "channel": "Multi-channel",
+      "status": "Planned",
+      "campaign_id": "camp_92b1be753a"
+    },
+    {
+      "date": "2026-06-22",
+      "title": "Q4 Demand Engine asset 3",
+      "channel": "Multi-channel",
+      "status": "Planned",
+      "campaign_id": "camp_92b1be753a"
+    },
+    {
+      "date": "2026-06-21",
+      "title": "Q4 Demand Engine asset 2",
+      "channel": "Multi-channel",
+      "status": "Planned",
+      "campaign_id": "camp_92b1be753a"
+    },
+    {
+      "date": "2026-06-20",
+      "title": "Q4 Demand Engine asset 1",
+      "channel": "Multi-channel",
+      "status": "Queued",
+      "campaign_id": "camp_92b1be753a"
+    },
+    {
+      "date": "2026-06-24",
+      "title": "Spring Demand Sprint asset 5",
+      "channel": "Blog + LinkedIn",
+      "status": "Planned",
+      "campaign_id": "camp_c71d58a679"
+    },
+    {
+      "date": "2026-06-23",
+      "title": "Spring Demand Sprint asset 4",
+      "channel": "Blog + LinkedIn",
+      "status": "Planned",
+      "campaign_id": "camp_c71d58a679"
+    },
+    {
+      "date": "2026-06-22",
+      "title": "Spring Demand Sprint asset 3",
+      "channel": "Blog + LinkedIn",
+      "status": "Planned",
+      "campaign_id": "camp_c71d58a679"
+    },
+    {
+      "date": "2026-06-21",
+      "title": "Spring Demand Sprint asset 2",
+      "channel": "Blog + LinkedIn",
+      "status": "Planned",
+      "campaign_id": "camp_c71d58a679"
+    },
+    {
+      "date": "2026-06-20",
+      "title": "Spring Demand Sprint asset 1",
+      "channel": "Blog + LinkedIn",
+      "status": "Queued",
+      "campaign_id": "camp_c71d58a679"
+    },
+    {
+      "date": "2026-06-20",
+      "title": "Strategy brief",
+      "channel": "Internal",
+      "status": "Done"
+    },
+    {
+      "date": "2026-06-21",
+      "title": "Trend research digest",
+      "channel": "Research",
+      "status": "Queued"
+    },
+    {
+      "date": "2026-06-22",
+      "title": "Long-form article draft",
+      "channel": "Website",
+      "status": "Queued"
+    },
+    {
+      "date": "2026-06-23",
+      "title": "LinkedIn carousel",
+      "channel": "LinkedIn",
+      "status": "Planned"
+    },
+    {
+      "date": "2026-06-24",
+      "title": "Email nurture sequence",
+      "channel": "Email",
+      "status": "Planned"
+    },
+    {
+      "date": "2026-06-25",
+      "title": "Performance review",
+      "channel": "Analytics",
+      "status": "Planned"
+    }
+  ],
+  "integrations": [
+    {
+      "key": "hubspot",
+      "name": "HubSpot",
+      "status": "Connected",
+      "last_sync": "2026-06-20T23:01:29+00:00",
+      "description": "CMS publishing, CRM sync, and workflow handoff."
+    },
+    {
+      "key": "buffer",
+      "name": "Buffer",
+      "status": "Connected",
+      "last_sync": "2026-06-20T23:11:38+00:00",
+      "description": "Queues and publishes social posts."
+    },
+    {
+      "key": "analytics",
+      "name": "Google Analytics",
+      "status": "Monitoring",
+      "last_sync": "2026-06-20T23:01:29+00:00",
+      "description": "Tracks traffic, conversions, and attribution."
+    }
+  ],
+  "analytics": {
+    "weekly_performance": [
+      {
+        "label": "Mon",
+        "value": 24
+      },
+      {
+        "label": "Tue",
+        "value": 32
+      },
+      {
+        "label": "Wed",
+        "value": 44
+      },
+      {
+        "label": "Thu",
+        "value": 49
+      },
+      {
+        "label": "Fri",
+        "value": 57
+      },
+      {
+        "label": "Sat",
+        "value": 61
+      },
+      {
+        "label": "Sun",
+        "value": 66
+      }
+    ],
+    "channel_breakdown": [
+      {
+        "label": "Organic",
+        "value": 46
+      },
+      {
+        "label": "Email",
+        "value": 24
+      },
+      {
+        "label": "Social",
+        "value": 18
+      },
+      {
+        "label": "Paid",
+        "value": 12
+      }
+    ]
+  },
+  "activity": [
+    {
+      "id": "act_769a615b0b",
+      "timestamp": "2026-06-20T23:15:01+00:00",
+      "severity": "success",
+      "message": "Launch sequence started for Q4 Demand Engine."
+    },
+    {
+      "id": "act_eb3d891421",
+      "timestamp": "2026-06-20T23:14:28+00:00",
+      "severity": "success",
+      "message": "All agents completed a coordination sweep."
+    },
+    {
+      "id": "act_91b277ea2f",
+      "timestamp": "2026-06-20T23:14:28+00:00",
+      "severity": "success",
+      "message": "All agents completed a coordination sweep."
+    },
+    {
+      "id": "act_e9eb8dda3b",
+      "timestamp": "2026-06-20T23:14:27+00:00",
+      "severity": "success",
+      "message": "All agents completed a coordination sweep."
+    },
+    {
+      "id": "act_ffae4e783b",
+      "timestamp": "2026-06-20T23:14:25+00:00",
+      "severity": "success",
+      "message": "All agents completed a coordination sweep."
+    },
+    {
+      "id": "act_7e2aab34fb",
+      "timestamp": "2026-06-20T23:13:14+00:00",
+      "severity": "info",
+      "message": "Research Agent completed a new task batch."
+    },
+    {
+      "id": "act_1f63b101de",
+      "timestamp": "2026-06-20T23:13:12+00:00",
+      "severity": "info",
+      "message": "Research Agent completed a new task batch."
+    },
+    {
+      "id": "act_0f36f6a86a",
+      "timestamp": "2026-06-20T23:13:11+00:00",
+      "severity": "info",
+      "message": "Research Agent completed a new task batch."
+    },
+    {
+      "id": "act_ea63692254",
+      "timestamp": "2026-06-20T23:13:08+00:00",
+      "severity": "info",
+      "message": "Writing Agent completed a new task batch."
+    },
+    {
+      "id": "act_ae83d86fd5",
+      "timestamp": "2026-06-20T23:13:08+00:00",
+      "severity": "info",
+      "message": "Writing Agent completed a new task batch."
+    },
+    {
+      "id": "act_97b36e3d11",
+      "timestamp": "2026-06-20T23:13:07+00:00",
+      "severity": "info",
+      "message": "Writing Agent completed a new task batch."
+    },
+    {
+      "id": "act_3bc76715ae",
+      "timestamp": "2026-06-20T23:11:38+00:00",
+      "severity": "success",
+      "message": "Buffer connection refreshed."
+    },
+    {
+      "id": "act_88adc3ed0f",
+      "timestamp": "2026-06-20T23:11:05+00:00",
+      "severity": "success",
+      "message": "Content draft created: vlogs."
+    },
+    {
+      "id": "act_f7a257b35c",
+      "timestamp": "2026-06-20T23:09:56+00:00",
+      "severity": "success",
+      "message": "All agents completed a coordination sweep."
+    },
+    {
+      "id": "act_2495bdfb9a",
+      "timestamp": "2026-06-20T23:09:52+00:00",
+      "severity": "success",
+      "message": "All agents completed a coordination sweep."
+    },
+    {
+      "id": "act_d6ff283f8b",
+      "timestamp": "2026-06-20T23:07:25+00:00",
+      "severity": "info",
+      "message": "Workspace settings updated."
+    },
+    {
+      "id": "act_49a1b59226",
+      "timestamp": "2026-06-20T23:06:40+00:00",
+      "severity": "info",
+      "message": "Workspace settings updated."
+    },
+    {
+      "id": "act_0ae6ef08d9",
+      "timestamp": "2026-06-20T23:04:45+00:00",
+      "severity": "info",
+      "message": "Writing Agent completed a new task batch."
+    },
+    {
+      "id": "act_0b0537da61",
+      "timestamp": "2026-06-20T23:04:44+00:00",
+      "severity": "info",
+      "message": "Writing Agent completed a new task batch."
+    },
+    {
+      "id": "act_071f9382af",
+      "timestamp": "2026-06-20T23:04:37+00:00",
+      "severity": "info",
+      "message": "Writing Agent completed a new task batch."
+    },
+    {
+      "id": "act_87f9a7f56a",
+      "timestamp": "2026-06-20T23:01:45+00:00",
+      "severity": "success",
+      "message": "Launch sequence started for Spring Demand Sprint."
+    },
+    {
+      "id": "act_064191fa57",
+      "timestamp": "2026-06-20T23:01:29+00:00",
+      "severity": "success",
+      "message": "Publishing queue synced to Buffer."
+    },
+    {
+      "id": "act_a2f71e5f60",
+      "timestamp": "2026-06-20T23:01:29+00:00",
+      "severity": "info",
+      "message": "Research Agent surfaced three new keyword clusters."
+    },
+    {
+      "id": "act_53b729a281",
+      "timestamp": "2026-06-20T23:01:29+00:00",
+      "severity": "info",
+      "message": "Analytics snapshot refreshed for the latest campaign."
+    }
+  ]
+}
