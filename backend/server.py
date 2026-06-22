@@ -24,7 +24,7 @@ import uvicorn
 
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = BASE_DIR.parent
-DB_PATH = BASE_DIR / "db.sqlite3"
+DB_PATH = Path(os.environ.get("DB_PATH", str(BASE_DIR / "db.sqlite3")))
 FRONTEND_DIST = PROJECT_DIR / "frontend" / "dist"
 
 SECRET_KEY = "ai-marketing-secret-key-2024"
