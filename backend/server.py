@@ -33,7 +33,7 @@ ACCESS_TOKEN_EXPIRE_HOURS = 24
 
 security = HTTPBearer(auto_error=False)
 import psycopg2
-DATABASE_URL = os.environ.get("DATABASE_URL") or "postgresql://postgres:KnNCsshYOJATdsflTyoCCUjxdAsavgtM@yamabiko.proxy.rlwy.net:22984/railway"
+DATABASE_URL = f"sqlite:////data/db.sqlite3"
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 engine = create_engine(DATABASE_URL)
