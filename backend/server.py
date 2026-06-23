@@ -259,7 +259,7 @@ def agent_log_to_dict(log: AgentLog) -> dict:
 
 
 def seed_database(db: Session):
-    if db.query(User).count() > 0:
+    if db.query(User).filter(User.email == "admin@demo.com").first():
         return
 
     user = User(
