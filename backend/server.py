@@ -2,7 +2,6 @@ import argparse
 import os
 import asyncio
 import json
-import os
 from datetime import datetime, timedelta, date
 from pathlib import Path
 from typing import Optional, List
@@ -24,7 +23,6 @@ import uvicorn
 
 BASE_DIR = Path(__file__).resolve().parent
 PROJECT_DIR = BASE_DIR.parent
-DB_PATH = Path(os.environ.get("DB_PATH", str(BASE_DIR / "db.sqlite3")))
 FRONTEND_DIST = PROJECT_DIR / "frontend" / "dist"
 
 SECRET_KEY = "ai-marketing-secret-key-2024"
@@ -32,13 +30,18 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_HOURS = 24
 
 security = HTTPBearer(auto_error=False)
-import psycopg2
-os.makedirs("/data", exist_ok=True)
-os.makedirs("/data", exist_ok=True)
-DATABASE_URL = f"sqlite:////data/db.sqlite3"
-if DATABASE_URL.startswith("postgres://"):
-    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
-engine = create_engine(DATABASE_URL)
+
+# Database setup
+_raw_url = os.environ.get("DATABASE_URL", "")
+if _raw_url.startswith("postgres://"):
+    _raw_url = _raw_url.replace("postgres://", "postgresql://", 1)
+
+if _raw_url and "postgresql" in _raw_url:
+    engine = create_engine(_raw_url)
+else:
+    DB_PATH = BASE_DIR / "db.sqlite3"
+    engine = create_engine(f"sqlite:///{DB_PATH}", connect_args={"check_same_thread": False})
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -321,12 +324,12 @@ def seed_database(db: Session):
         campaigns.append(c)
 
     content_data = [
-        {"campaign_id": campaigns[0].id, "title": "Summer Kickoff Blog Post", "content_type": "blog", "status": "published", "body": "Welcome to our summer campaign! Discover how we're bringing fresh energy to our brand this season.", "scheduled_at": datetime.utcnow() - timedelta(days=20), "published_at": datetime.utcnow() - timedelta(days=20)},
-        {"campaign_id": campaigns[0].id, "title": "Twitter Thread: Summer Tips", "content_type": "social_twitter", "status": "scheduled", "body": "🌞 Thread: 5 summer marketing tips that actually work. 1/ Start with audience research...", "scheduled_at": datetime.utcnow() + timedelta(days=3)},
-        {"campaign_id": campaigns[0].id, "title": "LinkedIn Brand Story", "content_type": "social_linkedin", "status": "review", "body": "Our journey started with a simple idea: make marketing smarter with AI.", "scheduled_at": datetime.utcnow() + timedelta(days=7)},
-        {"campaign_id": campaigns[1].id, "title": "Product Launch Email", "content_type": "email", "status": "draft", "body": "Subject: Introducing our newest innovation. We're thrilled to announce...", "scheduled_at": datetime.utcnow() + timedelta(days=14)},
-        {"campaign_id": campaigns[1].id, "title": "Launch Day Newsletter", "content_type": "newsletter", "status": "draft", "body": "This week in AI Marketing: Product launch preview, team updates, and exclusive early access.", "scheduled_at": datetime.utcnow() + timedelta(days=21)},
-        {"campaign_id": campaigns[2].id, "title": "Holiday Gift Guide Blog", "content_type": "blog", "status": "published", "body": "The ultimate holiday gift guide for marketing professionals. Curated picks for every budget.", "scheduled_at": datetime.utcnow() - timedelta(days=45), "published_at": datetime.utcnow() - timedelta(days=45)},
+        {"campaign_id": campaigns[0].id, "title": "Summer Kickoff Blog Post", "content_type": "blog", "status": "published", "body": "Welcome to our summer campaign!", "scheduled_at": datetime.utcnow() - timedelta(days=20), "published_at": datetime.utcnow() - timedelta(days=20)},
+        {"campaign_id": campaigns[0].id, "title": "Twitter Thread: Summer Tips", "content_type": "social_twitter", "status": "scheduled", "body": "5 summer marketing tips.", "scheduled_at": datetime.utcnow() + timedelta(days=3)},
+        {"campaign_id": campaigns[0].id, "title": "LinkedIn Brand Story", "content_type": "social_linkedin", "status": "review", "body": "Our journey started with a simple idea.", "scheduled_at": datetime.utcnow() + timedelta(days=7)},
+        {"campaign_id": campaigns[1].id, "title": "Product Launch Email", "content_type": "email", "status": "draft", "body": "Introducing our newest innovation.", "scheduled_at": datetime.utcnow() + timedelta(days=14)},
+        {"campaign_id": campaigns[1].id, "title": "Launch Day Newsletter", "content_type": "newsletter", "status": "draft", "body": "This week in AI Marketing.", "scheduled_at": datetime.utcnow() + timedelta(days=21)},
+        {"campaign_id": campaigns[2].id, "title": "Holiday Gift Guide Blog", "content_type": "blog", "status": "published", "body": "The ultimate holiday gift guide.", "scheduled_at": datetime.utcnow() - timedelta(days=45), "published_at": datetime.utcnow() - timedelta(days=45)},
     ]
 
     content_pieces = []
